@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>YB Protocol — Yahya Bakkar</title>
+<link rel="manifest" href="manifest.json">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="YB Protocol">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="theme-color" content="#0d0d0d">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0e0e0e;--bg2:#181818;--bg3:#222222;--bg4:#2a2a2a;
+  --border:#2e2e2e;--border2:#3a3a3a;--border3:#484848;
+  --text:#f5f2ec;--text2:#a89880;--text3:#6a6058;
+  --gold:#c9a84c;--gold2:#e8c96a;--goldbg:rgba(201,168,76,0.08);--goldborder:rgba(201,168,76,0.2);
+  --green:#4caf82;--greenbg:rgba(76,175,130,0.08);
+  --amber:#d4922a;--amberbg:rgba(212,146,42,0.08);
+  --red:#c95050;--redbg:rgba(201,80,80,0.08);
+  --blue:#5b8fd4;--bluebg:rgba(91,143,212,0.08);
+}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);height:100vh;overflow:hidden;display:flex}
+.sb{width:60px;background:#141414;border-right:1px solid var(--border2);display:flex;flex-direction:column;align-items:center;padding:10px 0;gap:2px;flex-shrink:0}
+.logo{width:38px;height:38px;display:flex;align-items:center;justify-content:center;margin-bottom:14px;cursor:pointer}
+.logo svg{width:32px;height:32px}
+.nb{width:40px;height:40px;border-radius:8px;border:none;background:transparent;color:var(--text3);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s}
+.nb:hover{background:var(--bg3);color:var(--text2)}
+.nb.on{background:var(--goldbg);color:var(--gold)}
+.nb svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:1.8}
+.main{flex:1;overflow-y:auto;overflow-x:hidden}
+.main::-webkit-scrollbar{width:3px}
+.main::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px}
+.page{display:none;padding:20px 18px 80px}
+.page.on{display:block}
+.hdr{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:4px}
+.htitle{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;letter-spacing:0.01em}
+.hsub{font-size:10px;color:var(--text3);margin-top:2px;letter-spacing:0.05em;text-transform:uppercase}
+.gold-line{height:1px;background:linear-gradient(90deg,var(--gold),transparent);margin:6px 0 12px;width:50px}
+.card{background:var(--bg2);border:1px solid var(--border2);border-radius:12px;padding:16px}
+.card2{background:var(--bg3);border:1px solid var(--border2);border-radius:10px;padding:14px}
+.card-gold{background:rgba(201,168,76,0.05);border:1px solid rgba(201,168,76,0.3);border-radius:12px;padding:16px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.met{background:var(--bg3);border-radius:10px;padding:12px;text-align:center;border:1px solid var(--border2)}
+.mval{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;line-height:1}
+.mlbl{font-size:9px;color:var(--text3);margin-top:3px;text-transform:uppercase;letter-spacing:.08em}
+.tag{display:inline-flex;align-items:center;padding:2px 9px;border-radius:3px;font-size:10px;font-weight:500;letter-spacing:0.04em;text-transform:uppercase}
+.tg{background:var(--greenbg);color:var(--green);border:1px solid rgba(76,175,130,.15)}
+.ta{background:var(--amberbg);color:var(--amber);border:1px solid rgba(212,146,42,.15)}
+.tr{background:var(--redbg);color:var(--red);border:1px solid rgba(201,80,80,.15)}
+.tb{background:var(--bluebg);color:var(--blue);border:1px solid rgba(91,143,212,.15)}
+.tgo{background:var(--goldbg);color:var(--gold);border:1px solid var(--goldborder)}
+.pt{background:var(--bg4);border-radius:20px;height:4px;overflow:hidden}
+.pf{height:100%;border-radius:20px;transition:width .5s ease}
+.pi{background:var(--bg2);border:1px solid var(--border2);border-radius:10px;padding:13px;margin-bottom:6px;cursor:pointer;transition:all .15s}
+.pi:hover{border-color:var(--border2)}
+.pi.done{border-color:rgba(201,168,76,.15);background:rgba(201,168,76,.02)}
+.pi-row{display:flex;align-items:center;gap:10px}
+.pi-name{font-size:13px;font-weight:400;flex:1;letter-spacing:0.01em}
+.pi-info{font-size:10px;color:var(--text3);margin-top:3px}
+.pi.done .pi-name{color:var(--text3);text-decoration:line-through}
+.chk{width:24px;height:24px;border-radius:5px;border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s}
+.chk.on{background:var(--gold);border-color:var(--gold)}
+.chk svg{width:12px;height:12px;stroke:#000;fill:none;stroke-width:2.5;display:none}
+.chk.on svg{display:block}
+.slbl{font-size:9px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin:14px 0 8px}
+.btn{padding:9px 18px;border-radius:6px;border:none;font-size:12px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s;letter-spacing:0.04em;text-transform:uppercase}
+.btn-p{background:var(--gold);color:#000}
+.btn-p:hover{background:var(--gold2)}
+.btn-g{background:transparent;border:1px solid var(--border2);color:var(--text2)}
+.btn-g:hover{border-color:var(--border3);color:var(--text)}
+.btn-sm{padding:5px 12px;font-size:10px;border-radius:5px}
+.tabs{display:flex;gap:2px;background:var(--bg3);border-radius:7px;padding:3px;border:1px solid var(--border);margin-bottom:12px}
+.tb2{padding:6px 14px;border-radius:5px;font-size:11px;cursor:pointer;color:var(--text2);border:none;background:transparent;transition:all .15s;font-family:'DM Sans',sans-serif;text-transform:uppercase;letter-spacing:0.04em}
+.tb2.on{background:var(--bg);color:var(--gold);border:1px solid var(--goldborder)}
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:100;align-items:center;justify-content:center}
+.overlay.on{display:flex}
+.modal{background:var(--bg2);border:1px solid var(--goldborder);border-radius:14px;padding:24px;width:90%;max-width:440px;max-height:90vh;overflow-y:auto}
+.modal h3{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;margin-bottom:16px}
+.field{margin-bottom:12px}
+.field label{display:block;font-size:10px;color:var(--text3);margin-bottom:5px;text-transform:uppercase;letter-spacing:0.06em}
+.field input,.field select,.field textarea{width:100%;background:var(--bg3);border:1px solid var(--border2);border-radius:6px;padding:9px 12px;font-size:13px;color:var(--text);font-family:'DM Sans',sans-serif;outline:none}
+.field input:focus,.field select:focus{border-color:var(--gold)}
+.field select option{background:var(--bg3)}
+.mrow{display:flex;gap:8px;margin-top:4px}
+.cgrid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px}
+.cday{aspect-ratio:1;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:11px;cursor:pointer}
+.cday.hdr{color:var(--text3);font-size:9px;cursor:default;font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+.cday.done{background:rgba(201,168,76,.1);color:var(--gold);font-weight:500}
+.cday.partial{background:rgba(212,146,42,.08);color:var(--amber)}
+.cday.today{border:1px solid var(--gold);color:var(--gold);font-weight:700}
+.cday.past{background:var(--bg3);color:var(--text3)}
+.cday.fut{color:var(--text3)}
+.jsrow{display:flex;align-items:center;margin-bottom:12px;gap:10px}
+.jsdots{display:flex;gap:5px}
+.jsd{width:28px;height:28px;border-radius:5px;cursor:pointer;border:1px solid var(--border2);background:var(--bg3);transition:all .15s}
+.bwc{background:var(--bg2);border:1px solid var(--border2);border-radius:10px;padding:13px;margin-bottom:6px}
+.bwv{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600}
+.chatbox{height:340px;overflow-y:auto;display:flex;flex-direction:column;gap:8px;padding:4px;margin-bottom:10px}
+.chatbox::-webkit-scrollbar{width:2px}
+.chatbox::-webkit-scrollbar-thumb{background:var(--border2)}
+.bubble{max-width:82%;padding:11px 14px;border-radius:10px;font-size:13px;line-height:1.6}
+.bubble.u{background:var(--gold);color:#000;align-self:flex-end;border-bottom-right-radius:2px;font-weight:500}
+.bubble.a{background:var(--bg3);color:var(--text);align-self:flex-start;border-bottom-left-radius:2px;border:1px solid var(--border)}
+.cinput{display:flex;gap:7px;border-top:1px solid var(--border);padding-top:10px}
+.cinput textarea{flex:1;background:var(--bg3);border:1px solid var(--border);border-radius:7px;padding:9px 12px;font-size:13px;color:var(--text);font-family:'DM Sans',sans-serif;outline:none;resize:none;min-height:40px;max-height:100px}
+.cinput textarea:focus{border-color:var(--gold)}
+.sbtn{width:38px;height:38px;border-radius:7px;background:var(--gold);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.sbtn svg{width:14px;height:14px;stroke:#000;fill:none;stroke-width:2.5}
+.chips{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px}
+.chip{padding:4px 11px;border-radius:3px;font-size:10px;border:1px solid var(--border2);background:var(--bg3);color:var(--text2);cursor:pointer;transition:all .15s;text-transform:uppercase;letter-spacing:0.04em}
+.chip:hover{border-color:var(--gold);color:var(--gold)}
+@keyframes pulse{0%,100%{opacity:.3}50%{opacity:1}}
+.ld span{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--gold);animation:pulse 1.2s infinite;margin:0 2px}
+.ld span:nth-child(2){animation-delay:.2s}.ld span:nth-child(3){animation-delay:.4s}
+.pm-item{background:var(--bg3);border:1px solid var(--border2);border-radius:9px;padding:12px 14px;margin-bottom:6px;display:flex;align-items:center;gap:10px}
+.pm-info{flex:1}.pm-name{font-size:13px;font-weight:400}.pm-meta{font-size:10px;color:var(--text3);margin-top:2px}
+.pm-actions{display:flex;gap:6px}
+.icon-btn{width:28px;height:28px;border-radius:5px;border:1px solid var(--border2);background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text3);transition:all .15s}
+.icon-btn.edit:hover{border-color:var(--gold);color:var(--gold)}
+.icon-btn.del:hover{border-color:var(--red);color:var(--red)}
+.icon-btn svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2}
+.quote-bar{border-left:2px solid var(--gold);padding:10px 14px;margin-bottom:14px;background:rgba(201,168,76,0.12);border-radius:0 8px 8px 0;border:1px solid rgba(201,168,76,0.15);border-left:2px solid var(--gold)}
+.quote-text{font-family:'Cormorant Garamond',serif;font-size:14px;font-style:italic;color:var(--text2);line-height:1.5}
+</style>
+</head>
+<body>
+
+<div class="sb">
+  <div class="logo">
+    <img src="icon-192.png" style="width:38px;height:38px;border-radius:9px;object-fit:cover;" alt="YB">
+  </div>
+  <button class="nb on" onclick="nav('dash')" id="nb-dash"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></button>
+  <button class="nb" onclick="nav('protocol')" id="nb-protocol"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></button>
+  <button class="nb" onclick="nav('manage')" id="nb-manage"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+  <button class="nb" onclick="nav('calendar')" id="nb-calendar"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></button>
+  <button class="nb" onclick="nav('journal')" id="nb-journal"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></button>
+  <button class="nb" onclick="nav('bloodwork')" id="nb-bloodwork"><svg viewBox="0 0 24 24"><path d="M12 2C6.5 2 4 7 4 12a8 8 0 0016 0c0-5-2.5-10-8-10z"/></svg></button>
+  <button class="nb" onclick="nav('ai')" id="nb-ai"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg></button>
+</div>
+
+<div class="main">
+
+<div class="page on" id="pg-dash">
+  <div class="hdr">
+    <div><div class="htitle">Yahya Bakkar</div><div class="gold-line"></div><div class="hsub">Week 1 · Phase 1 · April 4, 2026</div></div>
+    <div style="background:var(--goldbg);border:1px solid var(--goldborder);border-radius:4px;padding:5px 12px;font-size:10px;font-weight:500;color:var(--gold);letter-spacing:0.06em;text-transform:uppercase">🔥 2 Day Streak</div>
+  </div>
+  <div class="quote-bar"><div class="quote-text">"You were chosen. Now execute."</div></div>
+  <div style="display:flex;flex-direction:column;gap:12px">
+    <div class="g4">
+      <div class="met"><div class="mval" style="color:var(--gold)" id="d-comp">0%</div><div class="mlbl">Compliance</div></div>
+      <div class="met"><div class="mval" style="color:var(--green)">40%</div><div class="mlbl">Optimal</div></div>
+      <div class="met"><div class="mval" style="color:var(--amber)">489</div><div class="mlbl">Test. ng/dL</div></div>
+      <div class="met"><div class="mval" style="color:var(--red)">164</div><div class="mlbl">LDL</div></div>
+    </div>
+    <div class="card-gold">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+        <div><div style="font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:600">Phase 1 — Foundation</div><div style="font-size:10px;color:var(--text3);margin-top:2px;text-transform:uppercase;letter-spacing:0.05em">Week 1 of 8 · HCG unlocks Week 9</div></div>
+        <div class="tag tgo">Active</div>
+      </div>
+      <div class="pt"><div class="pf" style="width:12.5%;background:linear-gradient(90deg,var(--gold),var(--gold2))"></div></div>
+      <div style="display:flex;justify-content:space-between;font-size:9px;color:var(--text3);margin-top:5px;text-transform:uppercase;letter-spacing:0.05em"><span>Week 1</span><span>Phase 2 →</span></div>
+    </div>
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:600">Today's Injections</div>
+        <button class="btn btn-g btn-sm" onclick="nav('protocol')">Full list →</button>
+      </div>
+      <div id="dash-injects"></div>
+    </div>
+    <div class="g2">
+      <div class="bwc"><div style="font-size:9px;color:var(--text3);margin-bottom:4px;text-transform:uppercase;letter-spacing:.06em">LDL</div><div class="bwv" style="color:var(--red)">164.1<span style="font-size:10px;font-weight:400;color:var(--text3)"> mg/dL</span></div><div style="font-size:9px;color:var(--text3)">Target &lt;100</div><div class="pt" style="margin-top:6px"><div class="pf" style="width:75%;background:var(--red)"></div></div></div>
+      <div class="bwc"><div style="font-size:9px;color:var(--text3);margin-bottom:4px;text-transform:uppercase;letter-spacing:.06em">Testosterone</div><div class="bwv" style="color:var(--blue)">489<span style="font-size:10px;font-weight:400;color:var(--text3)"> ng/dL</span></div><div style="font-size:9px;color:var(--text3)">Target 700-1000</div><div class="pt" style="margin-top:6px"><div class="pf" style="width:48%;background:var(--blue)"></div></div></div>
+      <div class="bwc"><div style="font-size:9px;color:var(--text3);margin-bottom:4px;text-transform:uppercase;letter-spacing:.06em">Ferritin</div><div class="bwv" style="color:var(--amber)">445<span style="font-size:10px;font-weight:400;color:var(--text3)"> ng/mL</span></div><div style="font-size:9px;color:var(--text3)">Target 30-300</div><div class="pt" style="margin-top:6px"><div class="pf" style="width:80%;background:var(--amber)"></div></div></div>
+      <div class="bwc"><div style="font-size:9px;color:var(--text3);margin-bottom:4px;text-transform:uppercase;letter-spacing:.06em">Vitamin D</div><div class="bwv" style="color:var(--amber)">45.8<span style="font-size:10px;font-weight:400;color:var(--text3)"> ng/mL</span></div><div style="font-size:9px;color:var(--text3)">Target 60-80</div><div class="pt" style="margin-top:6px"><div class="pf" style="width:55%;background:var(--amber)"></div></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="page" id="pg-protocol">
+  <div class="hdr"><div><div class="htitle">Daily Protocol</div><div class="gold-line"></div><div class="hsub">April 4, 2026</div></div><div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--gold)" id="proto-pct">0%</div></div>
+  <div class="card" style="margin-bottom:12px"><div style="display:flex;justify-content:space-between;font-size:10px;color:var(--text3);margin-bottom:7px;text-transform:uppercase;letter-spacing:.05em"><span>Compliance</span><span id="proto-count">0/0</span></div><div class="pt"><div class="pf" id="proto-bar" style="width:0%;background:linear-gradient(90deg,var(--gold),var(--gold2))"></div></div></div>
+  <div class="tabs"><button class="tb2 on" onclick="protoTab('inj',this)">Injections</button><button class="tb2" onclick="protoTab('supp',this)">Supplements</button></div>
+  <div id="tab-inj"></div><div id="tab-supp" style="display:none"></div>
+</div>
+
+<div class="page" id="pg-manage">
+  <div class="hdr"><div><div class="htitle">Protocol Manager</div><div class="gold-line"></div><div class="hsub">Add, edit, or remove compounds</div></div></div>
+  <div class="tabs"><button class="tb2 on" onclick="manTab('inj',this)">Injections</button><button class="tb2" onclick="manTab('supp',this)">Supplements</button></div>
+  <div style="margin-bottom:10px"><button class="btn btn-p btn-sm" onclick="openAdd('inj')">+ Add Compound</button></div>
+  <div id="man-list"></div>
+</div>
+
+<div class="page" id="pg-calendar">
+  <div class="hdr"><div><div class="htitle">Calendar</div><div class="gold-line"></div><div class="hsub">April 2026</div></div><div style="display:flex;gap:8px;align-items:center"><div style="display:flex;align-items:center;gap:3px;font-size:9px;color:var(--gold);text-transform:uppercase;letter-spacing:.04em"><span style="width:6px;height:6px;border-radius:1px;background:rgba(201,168,76,.3);display:inline-block"></span>Done</div><div style="display:flex;align-items:center;gap:3px;font-size:9px;color:var(--amber);text-transform:uppercase;letter-spacing:.04em"><span style="width:6px;height:6px;border-radius:1px;background:rgba(212,146,42,.2);display:inline-block"></span>Partial</div></div></div>
+  <div class="card" style="margin-bottom:12px"><div id="cal-grid"></div></div>
+  <div class="card"><div style="font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:600;margin-bottom:10px">Streak</div><div style="display:flex;justify-content:space-between"><div style="text-align:center"><div style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;color:var(--gold)">2 🔥</div><div style="font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.06em">Current</div></div><div style="text-align:center"><div style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;color:var(--text2)">2</div><div style="font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.06em">Best</div></div><div style="text-align:center"><div style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;color:var(--green)">68%</div><div style="font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.06em">This Week</div></div></div></div>
+</div>
+
+<div class="page" id="pg-journal">
+  <div class="hdr"><div><div class="htitle">Wellness Journal</div><div class="gold-line"></div><div class="hsub">Daily check-in</div></div></div>
+  <div class="card" style="margin-bottom:12px">
+    <div style="font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:600;margin-bottom:14px">How are you feeling today?</div>
+    <div id="j-scores"></div>
+    <div class="field" style="margin-top:10px"><label>Notes</label><textarea rows="3" placeholder="Side effects, observations..." id="j-notes" style="background:var(--bg3);border:1px solid var(--border2);border-radius:6px;padding:9px 12px;font-size:13px;color:var(--text);font-family:'DM Sans',sans-serif;outline:none;width:100%;resize:vertical"></textarea></div>
+    <button class="btn btn-p" style="width:100%;margin-top:10px" onclick="saveJournal()">Save Check-in</button>
+  </div>
+  <div class="slbl">Recent entries</div><div id="j-history"></div>
+</div>
+
+<div class="page" id="pg-bloodwork">
+  <div class="hdr"><div><div class="htitle">Bloodwork</div><div class="gold-line"></div><div class="hsub">April 2 baseline · Rythm Health</div></div><div class="tag tb">40% Optimal</div></div>
+  <div class="slbl">Heart Health</div><div id="bw-heart"></div>
+  <div class="slbl">Hormones</div><div id="bw-hormone"></div>
+  <div class="slbl">Metabolic</div><div id="bw-metabolic"></div>
+</div>
+
+<div class="page" id="pg-ai">
+  <div class="hdr"><div><div class="htitle">YB AI Coach</div><div class="gold-line"></div><div class="hsub">Personalized to your bloodwork & stack</div></div><div class="tag tg">Live</div></div>
+  <div class="quote-bar" style="margin-bottom:12px"><div class="quote-text">I know your stack, your bloodwork, and your mission. Ask me anything.</div></div>
+  <div class="chips" id="ai-chips"></div>
+  <div class="card">
+    <div class="chatbox" id="chatbox"></div>
+    <div class="cinput">
+      <textarea id="ci" rows="1" placeholder="Ask about your protocol, bloodwork, or optimization..." onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMsg()}"></textarea>
+      <button class="sbtn" onclick="sendMsg()"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<div class="overlay" id="modal">
+  <div class="modal">
+    <h3 id="modal-title">Add Compound</h3>
+    <div class="field"><label>Name</label><input id="f-name" placeholder="e.g. BPC-157, Berberine 500mg"></div>
+    <div class="g2" style="gap:10px;margin-bottom:12px">
+      <div class="field" style="margin:0"><label>Dose</label><input id="f-dose" placeholder="e.g. 250mcg"></div>
+      <div class="field" style="margin:0"><label>Timing</label><select id="f-time"><option value="morning">Morning</option><option value="evening">Evening</option><option value="asNeeded">As needed</option><option value="meals">With meals</option><option value="bed">Bedtime</option><option value="empty">Empty stomach</option></select></div>
+    </div>
+    <div class="field"><label>Notes</label><input id="f-note" placeholder="e.g. Sub-Q injection, fasted"></div>
+    <div class="field"><label>Type</label><select id="f-type"><option value="inj">Injection / Peptide</option><option value="supp">Supplement / Oral</option></select></div>
+    <div class="mrow"><button class="btn btn-p" style="flex:1" onclick="saveModal()">Save</button><button class="btn btn-g" onclick="closeModal()">Cancel</button></div>
+  </div>
+</div>
+
+<script>
+let protocol={inj:[{id:'cjc',name:'CJC-1295 + Ipamorelin',dose:'300mcg/300mcg',time:'morning',note:'Sub-Q, fasted',checked:false},{id:'semax',name:'Semax 1%',dose:'200mcg',time:'morning',note:'Intranasal — cognitive',checked:false},{id:'bpc',name:'BPC-157',dose:'250mcg',time:'morning',note:'Sub-Q — gut healing',checked:false},{id:'glow',name:'GLOW Blend',dose:'1 vial',time:'morning',note:'Sub-Q — skin/collagen',checked:false},{id:'enclo',name:'Enclomiphene',dose:'12.5mg',time:'morning',note:'Oral — testosterone',checked:false},{id:'nad',name:'NAD+',dose:'250mg',time:'morning',note:'Sub-Q — energy',checked:false},{id:'kiss',name:'Kisspeptin-10',dose:'100mcg',time:'evening',note:'Sub-Q — HPT axis',checked:false},{id:'tb4',name:'TB-500',dose:'2.5mg',time:'evening',note:'Sub-Q — recovery',checked:false},{id:'dsip',name:'DSIP',dose:'200mcg',time:'evening',note:'Sub-Q — pre-bed',checked:false},{id:'pt141',name:'PT-141',dose:'1mg',time:'asNeeded',note:'Sub-Q — as needed',checked:false}],supp:[{id:'bern',name:'Berberine',dose:'500mg 2-3x/day',time:'morning',note:'With meals — LDL',checked:false},{id:'ryr',name:'Red Yeast Rice',dose:'600mg 2x/day',time:'meals',note:'With meals',checked:false},{id:'d3k2',name:'Vitamin D3 + K2',dose:'5000IU/200mcg',time:'morning',note:'With fat',checked:false},{id:'ip6',name:'IP6',dose:'1500mg',time:'empty',note:'Empty stomach',checked:false},{id:'omega',name:'Omega-3 Fish Oil',dose:'3-4g EPA/DHA',time:'meals',note:'Split doses',checked:false},{id:'zinc',name:'Zinc + Copper',dose:'30mg/2mg',time:'morning',note:'With food',checked:false},{id:'mag',name:'Magnesium Glycinate',dose:'400mg',time:'bed',note:'Before bed',checked:false},{id:'boron',name:'Boron',dose:'10mg',time:'morning',note:'Morning',checked:false},{id:'coq',name:'CoQ10 Ubiquinol',dose:'200mg',time:'meals',note:'With fat',checked:false},{id:'lion',name:"Lion's Mane",dose:'1000mg 2x',time:'meals',note:'With meals',checked:false},{id:'ash',name:'Ashwagandha KSM-66',dose:'300mg 2x',time:'meals',note:'With food',checked:false},{id:'prob',name:'Probiotic 50B CFU',dose:'1 cap',time:'morning',note:'With food',checked:false},{id:'enz',name:'Digestive Enzymes',dose:'1 cap',time:'meals',note:'Before meals',checked:false}]};
+const BW={heart:[{n:'Total Cholesterol',v:236,u:'mg/dL',t:'<200',s:'amber'},{n:'LDL Cholesterol',v:164.1,u:'mg/dL',t:'<100',s:'red'},{n:'HDL Cholesterol',v:55.5,u:'mg/dL',t:'>60',s:'amber'},{n:'ApoB',v:107,u:'mg/dL',t:'<90',s:'red'},{n:'hs-CRP',v:'<0.5',u:'mg/L',t:'<1.0',s:'green'},{n:'Triglycerides',v:82,u:'mg/dL',t:'<100',s:'green'},{n:'Remnant Cholesterol',v:16.4,u:'mg/dL',t:'<25',s:'green'},{n:'LDL/ApoB Ratio',v:1.53,u:'',t:'Optimal',s:'blue'}],hormone:[{n:'Total Testosterone',v:489,u:'ng/dL',t:'700-1000',s:'amber'},{n:'Free Testosterone',v:104.62,u:'pg/mL',t:'>150',s:'amber'},{n:'SHBG',v:32.4,u:'nmol/L',t:'20-30',s:'amber'},{n:'Estrogen (E2)',v:19.2,u:'pg/mL',t:'20-40',s:'blue'}],metabolic:[{n:'Ferritin',v:445,u:'ng/mL',t:'30-300',s:'red'},{n:'Vitamin D',v:45.8,u:'ng/mL',t:'60-80',s:'amber'},{n:'TSH',v:2.46,u:'mIU/L',t:'1.0-2.5',s:'green'},{n:'Free T3',v:3.18,u:'pg/mL',t:'3.0-4.5',s:'green'},{n:'Albumin',v:4.21,u:'g/dL',t:'4.0-5.0',s:'green'},{n:'Creatinine',v:0.983,u:'mg/dL',t:'0.7-1.2',s:'green'}]};
+let journalData=[{date:'Apr 3',e:4,l:3,s:4,m:4,notes:'Felt strong. Sleep solid.'},{date:'Apr 2',e:3,l:3,s:3,m:3,notes:'First day of protocol.'}];
+let jScores={e:0,l:0,s:0,m:0};
+let chatHistory=[{role:'assistant',content:"Yahya — I've got your full April 2 bloodwork and complete protocol loaded. LDL at 164, testosterone at 489, ferritin elevated at 445. Week 1 of Phase 1. You were chosen for this. What do you need?"}];
+let aiLoading=false,manageTab='inj',editId=null,editType=null;
+
+function nav(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));document.querySelectorAll('.nb').forEach(b=>b.classList.remove('on'));document.getElementById('pg-'+id).classList.add('on');document.getElementById('nb-'+id).classList.add('on');if(id==='protocol')renderProtocol();if(id==='manage')renderManage();if(id==='calendar')renderCalendar();if(id==='journal')renderJournal();if(id==='bloodwork')renderBW();if(id==='ai')renderAI();}
+
+function renderProtocol(){const all=[...protocol.inj,...protocol.supp];const done=all.filter(i=>i.checked).length;const pct=all.length?Math.round(done/all.length*100):0;document.getElementById('proto-pct').textContent=pct+'%';document.getElementById('proto-count').textContent=done+'/'+all.length;document.getElementById('proto-bar').style.width=pct+'%';document.getElementById('d-comp').textContent=pct+'%';const to=['morning','meals','empty','asNeeded','evening','bed'];const tl={morning:'Morning',meals:'With Meals',empty:'Empty Stomach',asNeeded:'As Needed',evening:'Evening',bed:'Bedtime'};function rg(items,cid){const el=document.getElementById(cid);if(!el)return;el.innerHTML='';const g={};items.forEach(i=>{const t=i.time||'morning';if(!g[t])g[t]=[];g[t].push(i);});to.forEach(t=>{if(!g[t])return;const lb=document.createElement('div');lb.className='slbl';lb.textContent=tl[t]||t;el.appendChild(lb);g[t].forEach(item=>{const div=document.createElement('div');div.className='pi'+(item.checked?' done':'');div.innerHTML='<div class="pi-row"><div class="chk '+(item.checked?'on':'')+'"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div style="flex:1"><div class="pi-name">'+item.name+'</div><div class="pi-info">'+item.dose+' · '+item.note+'</div></div></div>';div.onclick=()=>{item.checked=!item.checked;renderProtocol();renderDashInjects();};el.appendChild(div);});});}rg(protocol.inj,'tab-inj');rg(protocol.supp,'tab-supp');}
+
+function protoTab(tab,btn){document.querySelectorAll('#pg-protocol .tb2').forEach(t=>t.classList.remove('on'));btn.classList.add('on');document.getElementById('tab-inj').style.display=tab==='inj'?'block':'none';document.getElementById('tab-supp').style.display=tab==='supp'?'block':'none';}
+
+function renderDashInjects(){const el=document.getElementById('dash-injects');if(!el)return;el.innerHTML='';protocol.inj.slice(0,5).forEach(item=>{const div=document.createElement('div');div.style.cssText='display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);cursor:pointer';div.innerHTML='<div class="chk '+(item.checked?'on':'')+'"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><span style="flex:1;font-size:13px;'+(item.checked?'color:var(--text3);text-decoration:line-through':'')+'">'+item.name+'</span><span style="font-size:10px;color:var(--text3)">'+item.dose+'</span>';div.onclick=()=>{item.checked=!item.checked;renderDashInjects();renderProtocol();};el.appendChild(div);});}
+
+function renderManage(){const el=document.getElementById('man-list');const items=protocol[manageTab];el.innerHTML='';if(!items.length){el.innerHTML='<div style="text-align:center;color:var(--text3);padding:30px;font-size:13px">No compounds yet.</div>';return;}items.forEach(item=>{const div=document.createElement('div');div.className='pm-item';div.innerHTML='<div class="pm-info"><div class="pm-name">'+item.name+'</div><div class="pm-meta">'+item.dose+' · '+item.time+' · '+item.note+'</div></div><div class="pm-actions"><button class="icon-btn edit" onclick="openEdit(\''+item.id+'\',\''+manageTab+'\')"><svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button><button class="icon-btn del" onclick="deleteItem(\''+item.id+'\',\''+manageTab+'\')"><svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a1 1 0 011-1h4a1 1 0 011 1v2"/></svg></button></div>';el.appendChild(div);});}
+
+function manTab(tab,btn){manageTab=tab;document.querySelectorAll('#pg-manage .tb2').forEach(t=>t.classList.remove('on'));btn.classList.add('on');document.querySelector('#pg-manage .btn-p').onclick=()=>openAdd(tab);renderManage();}
+function openAdd(type){editId=null;editType=type||manageTab;document.getElementById('modal-title').textContent='Add Compound';['f-name','f-dose','f-note'].forEach(id=>document.getElementById(id).value='');document.getElementById('f-time').value='morning';document.getElementById('f-type').value=editType;document.getElementById('modal').classList.add('on');}
+function openEdit(id,type){editId=id;editType=type;const item=protocol[type].find(i=>i.id===id);if(!item)return;document.getElementById('modal-title').textContent='Edit Compound';document.getElementById('f-name').value=item.name;document.getElementById('f-dose').value=item.dose;document.getElementById('f-time').value=item.time;document.getElementById('f-note').value=item.note;document.getElementById('f-type').value=type;document.getElementById('modal').classList.add('on');}
+function closeModal(){document.getElementById('modal').classList.remove('on');}
+function saveModal(){const name=document.getElementById('f-name').value.trim();if(!name){alert('Please enter a name.');return;}const type=document.getElementById('f-type').value;const item={id:editId||'c'+Date.now(),name,dose:document.getElementById('f-dose').value.trim()||'—',time:document.getElementById('f-time').value,note:document.getElementById('f-note').value.trim()||'',checked:false};if(editId){protocol.inj=protocol.inj.filter(i=>i.id!==editId);protocol.supp=protocol.supp.filter(i=>i.id!==editId);}protocol[type].push(item);closeModal();renderManage();renderProtocol();renderDashInjects();}
+function deleteItem(id,type){if(!confirm('Remove this compound?'))return;protocol[type]=protocol[type].filter(i=>i.id!==id);renderManage();renderProtocol();renderDashInjects();}
+
+function renderCalendar(){const grid=document.getElementById('cal-grid');if(!grid)return;grid.innerHTML='';grid.className='cgrid';['Su','Mo','Tu','We','Th','Fr','Sa'].forEach(d=>{const el=document.createElement('div');el.className='cday hdr';el.textContent=d;grid.appendChild(el);});for(let i=0;i<3;i++){const el=document.createElement('div');el.className='cday';grid.appendChild(el);}for(let d=1;d<=30;d++){const el=document.createElement('div');el.textContent=d;el.className=d===4?'cday today':d===3?'cday done':d===2?'cday partial':d<4?'cday past':'cday fut';grid.appendChild(el);}}
+
+const JM=[{k:'e',l:'Energy',c:'var(--green)'},{k:'l',l:'Libido',c:'var(--gold)'},{k:'s',l:'Sleep',c:'var(--blue)'},{k:'m',l:'Mood',c:'var(--amber)'}];
+function renderJournal(){const el=document.getElementById('j-scores');if(!el)return;el.innerHTML='';JM.forEach(m=>{const row=document.createElement('div');row.className='jsrow';const dots=document.createElement('div');dots.className='jsdots';for(let i=1;i<=5;i++){const d=document.createElement('div');d.className='jsd';d.style.borderColor=jScores[m.k]>=i?m.c:'var(--border2)';d.style.background=jScores[m.k]>=i?m.c+'20':'var(--bg3)';d.onclick=(()=>{const v=i,k=m.k;return ()=>{jScores[k]=v;renderJournal();};})();dots.appendChild(d);}row.innerHTML='<span style="font-size:13px;min-width:60px">'+m.l+'</span>';row.appendChild(dots);const val=document.createElement('span');val.style.cssText='font-size:11px;color:var(--text3);min-width:28px;text-align:right';val.textContent=jScores[m.k]+'/5';row.appendChild(val);el.appendChild(row);});const hist=document.getElementById('j-history');if(hist){hist.innerHTML='';journalData.forEach(e=>{const div=document.createElement('div');div.className='card2';div.style.marginBottom='8px';div.innerHTML='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><span style="font-size:13px;font-family:\'Cormorant Garamond\',serif;font-weight:600">'+e.date+'</span><div style="display:flex;gap:8px"><span style="font-size:10px;color:var(--green)">E'+e.e+'</span><span style="font-size:10px;color:var(--gold)">L'+e.l+'</span><span style="font-size:10px;color:var(--blue)">S'+e.s+'</span><span style="font-size:10px;color:var(--amber)">M'+e.m+'</span></div></div><div style="font-size:11px;color:var(--text3)">'+e.notes+'</div>';hist.appendChild(div);});}}
+function saveJournal(){const notes=document.getElementById('j-notes')?.value||'';journalData.unshift({date:'Apr 4',e:jScores.e,l:jScores.l,s:jScores.s,m:jScores.m,notes:notes||'No notes'});document.getElementById('j-notes').value='';renderJournal();}
+
+function renderBW(){const sc={green:'var(--green)',amber:'var(--amber)',red:'var(--red)',blue:'var(--blue)'};const tc={green:'tg',amber:'ta',red:'tr',blue:'tb'};const tl={green:'Optimal',amber:'Average',red:'Flagged',blue:'Good'};const pp={green:85,amber:50,red:35,blue:65};function mkCard(item){const div=document.createElement('div');div.className='bwc';div.innerHTML='<div style="display:flex;justify-content:space-between;align-items:flex-start"><div><div style="font-size:9px;color:var(--text2);margin-bottom:3px;text-transform:uppercase;letter-spacing:.06em">'+item.n+'</div><div class="bwv" style="color:'+sc[item.s]+'">'+item.v+' <span style="font-size:10px;font-weight:400;color:var(--text3)">'+item.u+'</span></div><div style="font-size:9px;color:var(--text3);margin-top:2px">Target: '+item.t+'</div></div><div class="tag '+tc[item.s]+'">'+tl[item.s]+'</div></div><div class="pt" style="margin-top:8px"><div class="pf" style="width:'+pp[item.s]+'%;background:'+sc[item.s]+'"></div></div>';return div;}['heart','hormone','metabolic'].forEach(cat=>{const el=document.getElementById('bw-'+cat);if(!el)return;el.innerHTML='';BW[cat].forEach(i=>el.appendChild(mkCard(i)));});}
+
+const CHIPS=["Should I add HCG now?","Why is my LDL high?","How to lower ferritin?","Best time for CJC-1295?","When will testosterone improve?","Is SHBG too high?"];
+function getSystemPrompt(){const il=protocol.inj.map(i=>'  - '+i.name+' '+i.dose+' ('+i.time+') — '+i.note).join('\n');const sl=protocol.supp.map(i=>'  - '+i.name+' '+i.dose+' ('+i.time+') — '+i.note).join('\n');return `You are the personal AI health coach for Yahya Bakkar — mentor, advisor, father, and visionary leader. Be direct, specific, reference his actual numbers. Keep replies under 180 words. Speak like a sharp coach who respects his time and mission.\n\nBLOODWORK (April 2, 2026):\n- LDL: 164.1 mg/dL → target <100 (FLAGGED)\n- ApoB: 107 mg/dL → target <90 (FLAGGED)\n- Ferritin: 445 ng/mL → target 30-300 (ELEVATED)\n- Vitamin D: 45.8 ng/mL → target 60-80 (SUBOPTIMAL)\n- Total Testosterone: 489 ng/dL → target 700-1000\n- Free Testosterone: 104.62 pg/mL\n- SHBG: 32.4 nmol/L\n- HDL: 55.5, Triglycerides: 82, hs-CRP <0.5 (excellent)\n- TSH: 2.46, Free T3: 3.18\n\nINJECTIONS:\n${il}\n\nSUPPLEMENTS:\n${sl}\n\nGOALS: Testosterone 800+, LDL <100, Ferritin <300, Vitamin D 60-80\nPHASE: Week 1 of Phase 1. Phase 2 = HCG 500IU 3x/week at Week 9.`;}
+
+function renderAI(){const chips=document.getElementById('ai-chips');if(chips&&chips.innerHTML===''){CHIPS.forEach(c=>{const el=document.createElement('div');el.className='chip';el.textContent=c;el.onclick=()=>{document.getElementById('ci').value=c;sendMsg();};chips.appendChild(el);});}renderChat();}
+function renderChat(){const box=document.getElementById('chatbox');if(!box)return;box.innerHTML='';chatHistory.forEach(m=>{const div=document.createElement('div');div.className='bubble '+(m.role==='user'?'u':'a');div.innerHTML=m.content.replace(/\n/g,'<br>');box.appendChild(div);});if(aiLoading){const div=document.createElement('div');div.className='bubble a';div.innerHTML='<span class="ld"><span></span><span></span><span></span></span>';box.appendChild(div);}box.scrollTop=box.scrollHeight;}
+async function sendMsg(){const input=document.getElementById('ci');const msg=input?.value?.trim();if(!msg||aiLoading)return;input.value='';chatHistory.push({role:'user',content:msg});aiLoading=true;renderChat();try{const messages=chatHistory.slice(-10).map(m=>({role:m.role==='assistant'?'assistant':'user',content:m.content}));const resp=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:400,system:getSystemPrompt(),messages})});const data=await resp.json();chatHistory.push({role:'assistant',content:data.content?.[0]?.text||"Connection issue — try again."});}catch(e){chatHistory.push({role:'assistant',content:"Network error. Check connection and try again."});}aiLoading=false;renderChat();}
+
+if("serviceWorker" in navigator){window.addEventListener("load",()=>{navigator.serviceWorker.register("service-worker.js").catch(e=>console.log("SW:",e));});}
+renderDashInjects();renderCalendar();renderBW();renderJournal();
+</script>
+</body>
+</html>
