@@ -44,6 +44,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 .card2{background:var(--bg3);border:1px solid var(--border2);border-radius:10px;padding:14px}
 .card-gold{background:rgba(184,146,42,0.04);border:1px solid rgba(184,146,42,0.28);border-radius:12px;padding:16px;margin-bottom:12px;box-shadow:0 1px 4px rgba(0,0,0,0.04)}
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:12px}
 .g4{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px}
 .met{background:var(--bg2);border-radius:10px;padding:12px;text-align:center;border:1px solid var(--border2);box-shadow:0 1px 3px rgba(0,0,0,0.04)}
 .mval{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;line-height:1}
@@ -105,7 +106,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 .jsd{width:28px;height:28px;border-radius:5px;cursor:pointer;border:1.5px solid var(--border2);background:#fff;transition:all .15s}
 .bwc{background:var(--bg2);border:1px solid var(--border2);border-radius:10px;padding:13px;margin-bottom:6px;box-shadow:0 1px 3px rgba(0,0,0,0.04)}
 .bwv{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600}
-.chatbox{height:340px;overflow-y:auto;display:flex;flex-direction:column;gap:8px;padding:4px;margin-bottom:10px}
+/* ─── AI CHAT (shared between Dashboard + AI tab) ─── */
+.chatbox{height:280px;overflow-y:auto;display:flex;flex-direction:column;gap:8px;padding:4px;margin-bottom:10px}
+.chatbox.tall{height:380px}
 .chatbox::-webkit-scrollbar{width:2px}
 .chatbox::-webkit-scrollbar-thumb{background:var(--border2)}
 .bubble{max-width:82%;padding:11px 14px;border-radius:10px;font-size:13px;line-height:1.6;white-space:pre-wrap;word-break:break-word}
@@ -115,7 +118,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 .cinput textarea{flex:1;background:var(--bg3);border:1.5px solid var(--border2);border-radius:7px;padding:9px 12px;font-size:13px;color:var(--text);font-family:'DM Sans',sans-serif;outline:none;resize:none;min-height:40px;max-height:100px}
 .cinput textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(184,146,42,0.1)}
 .sbtn{width:38px;height:38px;border-radius:7px;background:var(--gold);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.sbtn svg{width:14px;height:14px;stroke:#000;fill:none;stroke-width:2.5}
+.sbtn svg{width:14px;height:14px;stroke:#fff;fill:none;stroke-width:2.5}
 .chips{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px}
 .chip{padding:4px 11px;border-radius:3px;font-size:10px;border:1px solid var(--border2);background:#fff;color:var(--text2);cursor:pointer;transition:all .15s;text-transform:uppercase;letter-spacing:0.04em}
 .chip:hover{border-color:var(--gold);color:var(--gold)}
@@ -135,6 +138,37 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 .ai-status-card{background:rgba(46,143,98,0.05);border:1px solid rgba(46,143,98,0.2);border-radius:10px;padding:12px 14px;margin-bottom:12px;display:flex;align-items:center;gap:10px}
 .ai-status-dot{width:8px;height:8px;border-radius:50%;background:var(--green);flex-shrink:0;box-shadow:0 0 6px rgba(76,175,130,0.6)}
 .ai-status-text{font-size:11px;color:var(--text2);line-height:1.5}
+/* ─── WEIGHT TRACKING ─── */
+.wt-setup{background:var(--goldbg);border:1px solid var(--goldborder);border-radius:12px;padding:20px;margin-bottom:12px;text-align:center}
+.wt-goal-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.wt-stat{background:var(--bg2);border:1px solid var(--border2);border-radius:10px;padding:14px;text-align:center;box-shadow:0 1px 3px rgba(0,0,0,0.04)}
+.wt-stat-val{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;line-height:1}
+.wt-stat-lbl{font-size:9px;color:var(--text3);margin-top:3px;text-transform:uppercase;letter-spacing:.08em}
+.wt-stat-sub{font-size:10px;color:var(--text3);margin-top:2px}
+.wt-entry{background:var(--bg2);border:1px solid var(--border2);border-radius:10px;padding:12px 14px;margin-bottom:6px;display:flex;align-items:center;gap:12px;box-shadow:0 1px 3px rgba(0,0,0,0.04)}
+.wt-entry-date{font-size:11px;color:var(--text3);min-width:60px}
+.wt-entry-vals{flex:1}
+.wt-entry-weight{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600}
+.wt-entry-bf{font-size:10px;color:var(--text3);margin-top:1px}
+.wt-entry-delta{font-size:11px;font-weight:500;text-align:right}
+.wt-chart{height:120px;position:relative;margin:8px 0}
+.wt-chart-line{position:absolute;bottom:0;left:0;right:0;top:0}
+.upload-zone{border:2px dashed var(--border2);border-radius:10px;padding:20px;text-align:center;cursor:pointer;transition:all .15s;background:var(--bg3);margin-bottom:12px}
+.upload-zone:hover{border-color:var(--gold);background:var(--goldbg)}
+.upload-zone input{display:none}
+.upload-zone-icon{font-size:28px;margin-bottom:8px}
+.upload-zone-text{font-size:12px;color:var(--text2)}
+.upload-zone-sub{font-size:10px;color:var(--text3);margin-top:3px}
+.wt-progress-bar-wrap{margin:10px 0}
+.wt-progress-label{display:flex;justify-content:space-between;font-size:10px;color:var(--text3);margin-bottom:5px;text-transform:uppercase;letter-spacing:.05em}
+/* ─── DASHBOARD SCHEDULE ─── */
+.sched-group{margin-bottom:14px}
+.sched-group-hdr{display:flex;align-items:center;gap:8px;padding:6px 10px;border-radius:6px;background:var(--bg3);border:1px solid var(--border2);margin-bottom:6px}
+.sched-group-icon{font-size:13px}
+.sched-group-label{font-size:10px;font-weight:500;color:var(--text2);text-transform:uppercase;letter-spacing:.07em;flex:1}
+.sched-group-count{font-size:10px;color:var(--text3)}
+.sched-item{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--border);cursor:pointer}
+.sched-item:last-child{border-bottom:none}
 </style>
 </head>
 <body>
@@ -147,6 +181,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
   </button>
   <button class="nb" onclick="nav('protocol')" id="nb-protocol" title="Daily Protocol">
     <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+  </button>
+  <button class="nb" onclick="nav('weight')" id="nb-weight" title="Weight Tracking">
+    <svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"/></svg>
   </button>
   <button class="nb" onclick="nav('manage')" id="nb-manage" title="Protocol Manager">
     <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
@@ -178,12 +215,16 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
     <div id="dash-streak" style="background:var(--goldbg);border:1px solid var(--goldborder);border-radius:4px;padding:5px 12px;font-size:10px;font-weight:500;color:var(--gold);letter-spacing:0.06em;text-transform:uppercase"></div>
   </div>
   <div class="quote-bar"><div class="quote-text" id="dash-quote">"You were chosen. Now execute."</div></div>
-  <div class="g4">
+
+  <!-- Metrics row -->
+  <div class="g4" id="dash-metrics">
     <div class="met"><div class="mval" style="color:var(--gold)" id="d-comp">0%</div><div class="mlbl">Compliance</div></div>
-    <div class="met"><div class="mval" style="color:var(--green)">40%</div><div class="mlbl">Optimal</div></div>
-    <div class="met"><div class="mval" style="color:var(--amber)">489</div><div class="mlbl">Test. ng/dL</div></div>
-    <div class="met"><div class="mval" style="color:var(--red)">164</div><div class="mlbl">LDL</div></div>
+    <div class="met"><div class="mval" style="color:var(--green)" id="d-wt">—</div><div class="mlbl">Weight</div></div>
+    <div class="met"><div class="mval" style="color:var(--amber)" id="d-bf">—</div><div class="mlbl">Body Fat</div></div>
+    <div class="met"><div class="mval" style="color:var(--blue)" id="d-streak-num">0</div><div class="mlbl">Day Streak</div></div>
   </div>
+
+  <!-- Phase progress -->
   <div class="card-gold">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
       <div>
@@ -197,18 +238,30 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
       <span id="dash-week-start">Week 1</span><span>Phase 2 →</span>
     </div>
   </div>
+
+  <!-- Full Day Schedule -->
   <div class="card">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-      <div style="font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:600">Today's Morning Injections</div>
-      <button class="btn btn-g btn-sm" onclick="nav('protocol')">Full list →</button>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+      <div style="font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:600">Today's Full Schedule</div>
+      <button class="btn btn-g btn-sm" onclick="nav('protocol')">Full Detail →</button>
     </div>
-    <div id="dash-injects"></div>
+    <div id="dash-schedule"></div>
+    <div style="font-size:10px;color:var(--text3);text-align:center;padding-top:10px;border-top:1px solid var(--border);margin-top:4px">Resets automatically at midnight · Tap any item to check off</div>
   </div>
-  <div class="g2">
-    <div class="bwc"><div style="font-size:9px;color:var(--text2);margin-bottom:4px;text-transform:uppercase;letter-spacing:.06em">LDL</div><div class="bwv" style="color:var(--red)">164.1<span style="font-size:10px;font-weight:400;color:var(--text3)"> mg/dL</span></div><div style="font-size:9px;color:var(--text3)">Target &lt;100</div><div class="pt" style="margin-top:6px"><div class="pf" style="width:75%;background:var(--red)"></div></div></div>
-    <div class="bwc"><div style="font-size:9px;color:var(--text2);margin-bottom:4px;text-transform:uppercase;letter-spacing:.06em">Testosterone</div><div class="bwv" style="color:var(--blue)">489<span style="font-size:10px;font-weight:400;color:var(--text3)"> ng/dL</span></div><div style="font-size:9px;color:var(--text3)">Target 700-1000</div><div class="pt" style="margin-top:6px"><div class="pf" style="width:48%;background:var(--blue)"></div></div></div>
-    <div class="bwc"><div style="font-size:9px;color:var(--text2);margin-bottom:4px;text-transform:uppercase;letter-spacing:.06em">Ferritin</div><div class="bwv" style="color:var(--amber)">445<span style="font-size:10px;font-weight:400;color:var(--text3)"> ng/mL</span></div><div style="font-size:9px;color:var(--text3)">Target 30-300</div><div class="pt" style="margin-top:6px"><div class="pf" style="width:80%;background:var(--amber)"></div></div></div>
-    <div class="bwc"><div style="font-size:9px;color:var(--text2);margin-bottom:4px;text-transform:uppercase;letter-spacing:.06em">Vitamin D</div><div class="bwv" style="color:var(--amber)">45.8<span style="font-size:10px;font-weight:400;color:var(--text3)"> ng/mL</span></div><div style="font-size:9px;color:var(--text3)">Target 60-80</div><div class="pt" style="margin-top:6px"><div class="pf" style="width:55%;background:var(--amber)"></div></div></div>
+
+  <!-- Embedded AI Coach -->
+  <div class="card" style="margin-bottom:0">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+      <div style="width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 6px rgba(46,143,98,0.5);flex-shrink:0"></div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:600;flex:1">YB AI Coach</div>
+      <div class="tag tg">Live</div>
+    </div>
+    <div class="chips" id="dash-chips"></div>
+    <div class="chatbox" id="dash-chatbox"></div>
+    <div class="cinput">
+      <textarea id="dash-ci" rows="1" placeholder="Ask about your protocol, bloodwork, or goals..." onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendDashMsg()}"></textarea>
+      <button class="sbtn" onclick="sendDashMsg()"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
+    </div>
   </div>
 </div>
 
@@ -235,6 +288,130 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
   </div>
   <div id="tab-inj"></div>
   <div id="tab-supp" style="display:none"></div>
+</div>
+
+<!-- ═══ WEIGHT TRACKING ═══ -->
+<div class="page" id="pg-weight">
+  <div class="hdr">
+    <div>
+      <div class="htitle">Body Composition</div>
+      <div class="gold-line"></div>
+      <div class="hsub" id="wt-subtitle">Track your transformation</div>
+    </div>
+    <div class="tag tgo" id="wt-phase-tag">Phase 1</div>
+  </div>
+
+  <!-- Goal setup card — shown only if goals not set -->
+  <div id="wt-setup-card" class="card-gold" style="display:none">
+    <div style="font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;margin-bottom:4px">Set Your Goals</div>
+    <div style="font-size:11px;color:var(--text3);margin-bottom:16px">Enter your targets once. The AI will track your progress automatically.</div>
+    <div class="g2" style="gap:10px">
+      <div class="field" style="margin:0"><label>Current Weight</label><input id="wt-cur-weight" type="number" step="0.1" placeholder="e.g. 185"></div>
+      <div class="field" style="margin:0"><label>Unit</label>
+        <select id="wt-unit"><option value="lbs">lbs</option><option value="kg">kg</option></select>
+      </div>
+    </div>
+    <div class="g2" style="gap:10px;margin-top:10px">
+      <div class="field" style="margin:0"><label>Target Weight</label><input id="wt-goal-weight" type="number" step="0.1" placeholder="e.g. 175"></div>
+      <div class="field" style="margin:0"><label>Target Body Fat %</label><input id="wt-goal-bf" type="number" step="0.1" placeholder="e.g. 12"></div>
+    </div>
+    <div class="g2" style="gap:10px;margin-top:10px">
+      <div class="field" style="margin:0"><label>Current Body Fat %</label><input id="wt-cur-bf" type="number" step="0.1" placeholder="e.g. 18"></div>
+      <div class="field" style="margin:0"><label>Goal Timeline</label>
+        <select id="wt-timeline"><option value="8">8 Weeks</option><option value="12">12 Weeks</option><option value="16">16 Weeks</option><option value="24">24 Weeks</option></select>
+      </div>
+    </div>
+    <div class="field" style="margin-top:10px"><label>Additional Goals (optional)</label><input id="wt-extra-goal" placeholder="e.g. Build visible abs, improve posture..."></div>
+    <button class="btn btn-p" style="width:100%;margin-top:4px" onclick="saveWeightGoals()">Save Goals & Start Tracking</button>
+  </div>
+
+  <!-- Stats row — shown after goals set -->
+  <div id="wt-stats-row" style="display:none">
+    <div class="g2">
+      <div class="wt-stat">
+        <div class="wt-stat-val" style="color:var(--gold)" id="wt-current-display">—</div>
+        <div class="wt-stat-lbl">Current Weight</div>
+        <div class="wt-stat-sub" id="wt-to-goal">— to go</div>
+      </div>
+      <div class="wt-stat">
+        <div class="wt-stat-val" style="color:var(--green)" id="wt-bf-display">—</div>
+        <div class="wt-stat-lbl">Body Fat %</div>
+        <div class="wt-stat-sub" id="wt-bf-to-goal">— to go</div>
+      </div>
+    </div>
+    <div class="g2">
+      <div class="wt-stat">
+        <div class="wt-stat-val" style="color:var(--blue)" id="wt-lost-display">0</div>
+        <div class="wt-stat-lbl">Total Lost</div>
+        <div class="wt-stat-sub" id="wt-unit-lbl">lbs</div>
+      </div>
+      <div class="wt-stat">
+        <div class="wt-stat-val" style="color:var(--amber)" id="wt-progress-pct">0%</div>
+        <div class="wt-stat-lbl">Goal Progress</div>
+        <div class="wt-stat-sub" id="wt-entries-count">0 check-ins</div>
+      </div>
+    </div>
+
+    <!-- Progress bar -->
+    <div class="card" style="margin-bottom:12px">
+      <div class="wt-progress-label">
+        <span>Start: <span id="wt-bar-start">—</span></span>
+        <span>Goal: <span id="wt-bar-goal">—</span></span>
+      </div>
+      <div class="pt" style="height:8px"><div class="pf" id="wt-progress-bar" style="background:linear-gradient(90deg,var(--gold),var(--gold2));width:0%"></div></div>
+    </div>
+
+    <!-- Mini chart -->
+    <div class="card" style="margin-bottom:12px">
+      <div style="font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:600;margin-bottom:10px">Weight Trend</div>
+      <canvas id="wt-chart" height="100" style="width:100%;display:block"></canvas>
+      <div style="font-size:9px;color:var(--text3);text-align:center;margin-top:6px" id="wt-chart-note">Log more check-ins to see your trend</div>
+    </div>
+  </div>
+
+  <!-- Log new weigh-in -->
+  <div class="slbl">Log Today's Weigh-In</div>
+  <div class="card">
+    <div class="g2" style="gap:10px">
+      <div class="field" style="margin:0"><label>Weight (<span id="wt-log-unit">lbs</span>)</label><input id="wt-log-weight" type="number" step="0.1" placeholder="e.g. 183.5"></div>
+      <div class="field" style="margin:0"><label>Body Fat % (optional)</label><input id="wt-log-bf" type="number" step="0.1" placeholder="e.g. 17.2"></div>
+    </div>
+    <div class="field" style="margin-top:10px"><label>Notes (optional)</label><input id="wt-log-notes" placeholder="e.g. Post-workout, morning fasted..."></div>
+
+    <!-- Upload scale screenshot -->
+    <div class="upload-zone" onclick="document.getElementById('wt-img-input').click()">
+      <input type="file" id="wt-img-input" accept="image/*" onchange="handleScaleUpload(event)">
+      <div class="upload-zone-icon">📸</div>
+      <div class="upload-zone-text">Upload scale screenshot</div>
+      <div class="upload-zone-sub">Tap to select photo from your scale app</div>
+    </div>
+    <div id="wt-img-preview" style="display:none;margin-bottom:12px">
+      <img id="wt-preview-img" style="width:100%;border-radius:8px;border:1px solid var(--border2);max-height:200px;object-fit:contain">
+      <div style="font-size:10px;color:var(--green);margin-top:5px;text-align:center">✓ Screenshot attached</div>
+    </div>
+
+    <button class="btn btn-p" style="width:100%" onclick="logWeighIn()">Log Weigh-In</button>
+  </div>
+
+  <!-- AI Weight Coach -->
+  <div class="slbl">AI Body Composition Coach</div>
+  <div class="card" style="margin-bottom:12px">
+    <div class="chips" id="wt-chips"></div>
+    <div class="chatbox" id="wt-chatbox"></div>
+    <div class="cinput">
+      <textarea id="wt-ci" rows="1" placeholder="Ask about your weight, body composition, or goals..." onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendWtMsg()}"></textarea>
+      <button class="sbtn" onclick="sendWtMsg()"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
+    </div>
+  </div>
+
+  <!-- History -->
+  <div class="slbl">Check-In History</div>
+  <div id="wt-history"></div>
+
+  <!-- Edit goals link -->
+  <div style="text-align:center;margin-top:8px">
+    <button class="btn btn-g btn-sm" onclick="editWeightGoals()">Edit Goals</button>
+  </div>
 </div>
 
 <!-- ═══ PROTOCOL MANAGER ═══ -->
@@ -315,7 +492,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
   <div class="slbl">Metabolic</div><div id="bw-metabolic"></div>
 </div>
 
-<!-- ═══ AI COACH ═══ -->
+<!-- ═══ AI COACH (full page) ═══ -->
 <div class="page" id="pg-ai">
   <div class="hdr">
     <div>
@@ -330,22 +507,21 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
   </div>
   <div class="ai-status-card">
     <div class="ai-status-dot"></div>
-    <div class="ai-status-text">AI Coach is live and ready — fully loaded with Yahya's bloodwork and protocol.</div>
+    <div class="ai-status-text">AI Coach is live — loaded with Yahya's bloodwork, protocol, and body composition goals.</div>
   </div>
   <div class="chips" id="ai-chips"></div>
   <div class="card" style="margin-bottom:0">
-    <div class="chatbox" id="chatbox"></div>
+    <div class="chatbox tall" id="chatbox"></div>
     <div class="cinput">
       <textarea id="ci" rows="1" placeholder="Ask about your protocol, bloodwork, or optimization..." onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMsg()}"></textarea>
       <button class="sbtn" onclick="sendMsg()"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
     </div>
   </div>
-
 </div>
 
 </div><!-- /.main -->
 
-<!-- ═══ ADD/EDIT MODAL ═══ -->
+<!-- ═══ ADD/EDIT COMPOUND MODAL ═══ -->
 <div class="overlay" id="modal" onclick="if(event.target===this)closeModal()">
   <div class="modal">
     <h3 id="modal-title">Add Compound</h3>
@@ -384,6 +560,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 // CONSTANTS
 // ═══════════════════════════════════════════════════════════════
 const PROTOCOL_START = new Date('2026-04-04T00:00:00');
+const AI_PROXY_URL = 'https://pbv-companion-ai.onrender.com';
 
 const QUOTES = [
   '"You were chosen. Now execute."',
@@ -406,24 +583,17 @@ const TIMING_GROUPS = {
 
 const TIMING_ORDER = ['morning','evening','bed','meals','empty','asNeeded'];
 
-// ═══════════════════════════════════════════════════════════════
-// DEFAULT PROTOCOL — optimized peptide timing
-// ═══════════════════════════════════════════════════════════════
 const DEFAULT_PROTOCOL = {
   inj: [
-    // MORNING — fasted, upon waking
     {id:'semax',  name:'Semax 1%',              dose:'200mcg',        time:'morning', note:'Intranasal — cognitive boost, fasted',         checked:false},
     {id:'bpc',    name:'BPC-157',               dose:'250mcg',        time:'morning', note:'Sub-Q — gut healing & repair, fasted',         checked:false},
     {id:'glow',   name:'GLOW Blend',            dose:'1 vial',        time:'morning', note:'Sub-Q — skin & collagen support',              checked:false},
     {id:'enclo',  name:'Enclomiphene',          dose:'12.5mg',        time:'morning', note:'Oral — testosterone stimulation',              checked:false},
     {id:'nad',    name:'NAD+',                  dose:'250mg',         time:'morning', note:'Sub-Q — cellular energy & metabolism',         checked:false},
-    // EVENING — 1-2 hours after last meal
     {id:'kiss',   name:'Kisspeptin-10',         dose:'100mcg',        time:'evening', note:'Sub-Q — HPT axis stimulation',                 checked:false},
     {id:'tb4',    name:'TB-500',                dose:'2.5mg',         time:'evening', note:'Sub-Q — tissue recovery & repair',             checked:false},
-    // BEDTIME — 30-60 min before sleep, maximizes GH pulse during deep sleep
     {id:'cjc',    name:'CJC-1295 + Ipamorelin',dose:'300mcg/300mcg', time:'bed',     note:'Sub-Q — GH release, fasted 2h before bed',     checked:false},
     {id:'dsip',   name:'DSIP',                  dose:'200mcg',        time:'bed',     note:'Sub-Q — delta sleep induction',                checked:false},
-    // AS NEEDED
     {id:'pt141',  name:'PT-141',                dose:'1mg',           time:'asNeeded',note:'Sub-Q — as needed',                           checked:false}
   ],
   supp: [
@@ -475,67 +645,39 @@ const BW = {
 // ═══════════════════════════════════════════════════════════════
 function todayKey() {
   const d = new Date();
-  return d.getFullYear() + '-' +
-    String(d.getMonth()+1).padStart(2,'0') + '-' +
-    String(d.getDate()).padStart(2,'0');
+  return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
 }
-
-function formatDate(d) {
-  return d.toLocaleDateString('en-US', {month:'long', day:'numeric', year:'numeric'});
-}
-
+function formatDate(d) { return d.toLocaleDateString('en-US', {month:'long', day:'numeric', year:'numeric'}); }
+function formatDateShort(d) { return d.toLocaleDateString('en-US', {month:'short', day:'numeric'}); }
 function getWeekNumber() {
   const diff = Math.floor((Date.now() - PROTOCOL_START.getTime()) / 86400000);
   return Math.max(1, Math.min(8, Math.floor(diff / 7) + 1));
 }
-
-function getDayIndex() {
-  return Math.floor((Date.now() - PROTOCOL_START.getTime()) / 86400000);
-}
-
-// Safe text escaping — prevents XSS
-function esc(str) {
-  const d = document.createElement('div');
-  d.textContent = String(str);
-  return d.innerHTML;
-}
+function getDayIndex() { return Math.floor((Date.now() - PROTOCOL_START.getTime()) / 86400000); }
+function esc(str) { const d = document.createElement('div'); d.textContent = String(str); return d.innerHTML; }
 
 // ═══════════════════════════════════════════════════════════════
 // LOCALSTORAGE — PROTOCOL
 // ═══════════════════════════════════════════════════════════════
-
 function loadProtocol() {
   const today = todayKey();
   const savedDate = localStorage.getItem('pbv_date');
   const savedProto = localStorage.getItem('pbv_protocol');
-
-  if (savedProto && savedDate === today) {
-    return JSON.parse(savedProto);
-  }
-
-  // New day — reset checks, preserve custom compounds
+  if (savedProto && savedDate === today) return JSON.parse(savedProto);
   if (savedProto && savedDate) {
     const old = JSON.parse(savedProto);
     recordDayCompletion(savedDate, old);
-    const fresh = {
-      inj: old.inj.map(i => ({...i, checked:false})),
-      supp: old.supp.map(i => ({...i, checked:false}))
-    };
+    const fresh = { inj: old.inj.map(i => ({...i, checked:false})), supp: old.supp.map(i => ({...i, checked:false})) };
     localStorage.setItem('pbv_date', today);
     localStorage.setItem('pbv_protocol', JSON.stringify(fresh));
     return fresh;
   }
-
-  // First time — use defaults
   const fresh = JSON.parse(JSON.stringify(DEFAULT_PROTOCOL));
   localStorage.setItem('pbv_date', today);
   localStorage.setItem('pbv_protocol', JSON.stringify(fresh));
   return fresh;
 }
-
-function saveProtocol(p) {
-  localStorage.setItem('pbv_protocol', JSON.stringify(p));
-}
+function saveProtocol(p) { localStorage.setItem('pbv_protocol', JSON.stringify(p)); }
 
 // ═══════════════════════════════════════════════════════════════
 // LOCALSTORAGE — STREAKS
@@ -545,26 +687,15 @@ function loadStreaks() {
   if (s) return JSON.parse(s);
   return {current:2, best:2, history:{'2026-04-02':'partial','2026-04-03':'done'}};
 }
-
-function saveStreaks(s) {
-  localStorage.setItem('pbv_streaks', JSON.stringify(s));
-}
-
+function saveStreaks(s) { localStorage.setItem('pbv_streaks', JSON.stringify(s)); }
 function recordDayCompletion(dateKey, proto) {
   const all = [...proto.inj, ...proto.supp];
   const done = all.filter(i => i.checked).length;
   const pct = all.length ? done / all.length : 0;
   const streaks = loadStreaks();
-  if (pct >= 0.8) {
-    streaks.history[dateKey] = 'done';
-    streaks.current = (streaks.current || 0) + 1;
-    if (streaks.current > streaks.best) streaks.best = streaks.current;
-  } else if (pct > 0) {
-    streaks.history[dateKey] = 'partial';
-    streaks.current = 0;
-  } else {
-    streaks.current = 0;
-  }
+  if (pct >= 0.8) { streaks.history[dateKey] = 'done'; streaks.current = (streaks.current||0)+1; if (streaks.current > streaks.best) streaks.best = streaks.current; }
+  else if (pct > 0) { streaks.history[dateKey] = 'partial'; streaks.current = 0; }
+  else { streaks.current = 0; }
   saveStreaks(streaks);
 }
 
@@ -574,27 +705,47 @@ function recordDayCompletion(dateKey, proto) {
 function loadJournal() {
   const s = localStorage.getItem('pbv_journal');
   if (s) return JSON.parse(s);
-  return [
-    {date:'Apr 3', dateKey:'2026-04-03', e:4, l:3, s:4, m:4, notes:'Felt strong. Sleep solid.'},
-    {date:'Apr 2', dateKey:'2026-04-02', e:3, l:3, s:3, m:3, notes:'First day of protocol.'}
-  ];
+  return [{date:'Apr 3', dateKey:'2026-04-03', e:4, l:3, s:4, m:4, notes:'Felt strong. Sleep solid.'},{date:'Apr 2', dateKey:'2026-04-02', e:3, l:3, s:3, m:3, notes:'First day of protocol.'}];
 }
+function saveJournalData(data) { localStorage.setItem('pbv_journal', JSON.stringify(data)); }
 
-function saveJournalData(data) {
-  localStorage.setItem('pbv_journal', JSON.stringify(data));
+// ═══════════════════════════════════════════════════════════════
+// LOCALSTORAGE — WEIGHT
+// ═══════════════════════════════════════════════════════════════
+function loadWeightData() {
+  const s = localStorage.getItem('pbv_weight');
+  if (s) return JSON.parse(s);
+  return { goals: null, entries: [] };
 }
+function saveWeightData(d) { localStorage.setItem('pbv_weight', JSON.stringify(d)); }
 
 // ═══════════════════════════════════════════════════════════════
 // GLOBAL STATE
 // ═══════════════════════════════════════════════════════════════
 let protocol = loadProtocol();
 let journalData = loadJournal();
+let weightData = loadWeightData();
 let jScores = {e:0, l:0, s:0, m:0};
+let scaleImgData = null;
+
+// Shared chat history for dashboard AI
+let dashChatHistory = [{
+  role: 'assistant',
+  content: "Yahya — Week " + getWeekNumber() + " of Phase 1. Your bloodwork is loaded, your protocol is set.\n\nLDL at 164 (target <100), testosterone at 489 (target 700-1000), ferritin elevated at 445.\n\nWhat do you need?"
+}];
+let dashAiLoading = false;
+
+// Full AI tab chat history
 let chatHistory = [{
   role: 'assistant',
   content: "Yahya — I've got your full April 2 bloodwork and complete protocol loaded.\n\nLDL at 164 (target <100), testosterone at 489 (target 700-1000), ferritin elevated at 445 (target 30-300).\n\nWeek " + getWeekNumber() + " of Phase 1. You were chosen for this. What do you need?"
 }];
 let aiLoading = false;
+
+// Weight AI chat history
+let wtChatHistory = [];
+let wtAiLoading = false;
+
 let manageTab = 'inj';
 let editId = null;
 let editType = null;
@@ -613,6 +764,8 @@ function nav(id) {
   if (id === 'journal')  renderJournal();
   if (id === 'bloodwork')renderBW();
   if (id === 'ai')       renderAI();
+  if (id === 'weight')   renderWeight();
+  if (id === 'dash')     renderDashboard();
 }
 
 // ═══════════════════════════════════════════════════════════════
@@ -638,6 +791,9 @@ function renderDashboard() {
   const sb = document.getElementById('dash-streak');
   if (sb) sb.textContent = '🔥 ' + streaks.current + ' Day Streak';
 
+  const dsn = document.getElementById('d-streak-num');
+  if (dsn) dsn.textContent = streaks.current;
+
   const q = document.getElementById('dash-quote');
   if (q) q.textContent = QUOTES[getDayIndex() % QUOTES.length];
 
@@ -647,32 +803,130 @@ function renderDashboard() {
   const dc = document.getElementById('d-comp');
   if (dc) dc.textContent = pct + '%';
 
-  renderDashInjects();
+  // Weight metrics on dashboard
+  const wt = loadWeightData();
+  const lastEntry = wt.entries && wt.entries.length ? wt.entries[0] : null;
+  const dw = document.getElementById('d-wt');
+  const dbf = document.getElementById('d-bf');
+  if (dw) dw.textContent = lastEntry ? lastEntry.weight + (wt.goals ? ' ' + wt.goals.unit : '') : '—';
+  if (dbf) dbf.textContent = lastEntry && lastEntry.bf ? lastEntry.bf + '%' : '—';
+
+  renderDashSchedule();
+  renderDashChat();
 }
 
-function renderDashInjects() {
-  const el = document.getElementById('dash-injects');
+function renderDashSchedule() {
+  const el = document.getElementById('dash-schedule');
   if (!el) return;
   el.innerHTML = '';
-  const morningInj = protocol.inj.filter(i => i.time === 'morning');
-  if (!morningInj.length) {
-    el.innerHTML = '<div style="font-size:12px;color:var(--text3);padding:8px 0">No morning injections scheduled.</div>';
-    return;
-  }
-  morningInj.forEach(item => {
-    const div = document.createElement('div');
-    div.style.cssText = 'display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border2);cursor:pointer';
-    div.innerHTML =
-      '<div class="chk' + (item.checked ? ' on' : '') + '"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>' +
-      '<span style="flex:1;font-size:13px;' + (item.checked ? 'color:var(--text3);text-decoration:line-through' : '') + '">' + esc(item.name) + '</span>' +
-      '<span style="font-size:10px;color:var(--text3)">' + esc(item.dose) + '</span>';
-    div.onclick = () => {
-      item.checked = !item.checked;
-      saveProtocol(protocol);
-      renderDashboard();
-    };
-    el.appendChild(div);
+
+  const all = [...protocol.inj, ...protocol.supp];
+  const groups = {};
+  all.forEach(item => {
+    if (!groups[item.time]) groups[item.time] = [];
+    groups[item.time].push(item);
   });
+
+  // Only show morning, evening, bed, meals, empty (skip asNeeded on dashboard)
+  const dashOrder = ['morning', 'evening', 'bed', 'meals', 'empty'];
+  dashOrder.forEach(timing => {
+    if (!groups[timing] || !groups[timing].length) return;
+    const tInfo = TIMING_GROUPS[timing];
+    const groupDone = groups[timing].filter(i => i.checked).length;
+    const allDone = groupDone === groups[timing].length;
+
+    const section = document.createElement('div');
+    section.className = 'sched-group';
+
+    const hdr = document.createElement('div');
+    hdr.className = 'sched-group-hdr';
+    hdr.style.background = allDone ? 'rgba(184,146,42,0.06)' : 'var(--bg3)';
+    hdr.innerHTML =
+      '<span class="sched-group-icon">' + tInfo.icon + '</span>' +
+      '<span class="sched-group-label">' + tInfo.label + '</span>' +
+      '<span class="sched-group-count" style="color:' + (allDone ? 'var(--green)' : 'var(--text3)') + '">' + groupDone + '/' + groups[timing].length + '</span>';
+    section.appendChild(hdr);
+
+    groups[timing].forEach(item => {
+      const div = document.createElement('div');
+      div.className = 'sched-item';
+      div.innerHTML =
+        '<div class="chk' + (item.checked ? ' on' : '') + '"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>' +
+        '<span style="flex:1;font-size:13px;' + (item.checked ? 'color:var(--text3);text-decoration:line-through' : '') + '">' + esc(item.name) + '</span>' +
+        '<span style="font-size:10px;color:var(--text3)">' + esc(item.dose) + '</span>';
+      div.onclick = () => {
+        item.checked = !item.checked;
+        saveProtocol(protocol);
+        renderDashboard();
+      };
+      section.appendChild(div);
+    });
+
+    el.appendChild(section);
+  });
+}
+
+// ─── DASHBOARD AI CHAT ───
+const DASH_CHIPS = [
+  "What's my morning protocol?",
+  "Why is my LDL high?",
+  "How to lower ferritin?",
+  "When will testosterone improve?",
+  "Best time for CJC-1295?"
+];
+
+function renderDashChat() {
+  const chips = document.getElementById('dash-chips');
+  if (chips && chips.innerHTML === '') {
+    DASH_CHIPS.forEach(c => {
+      const el = document.createElement('div');
+      el.className = 'chip';
+      el.textContent = c;
+      el.onclick = () => { document.getElementById('dash-ci').value = c; sendDashMsg(); };
+      chips.appendChild(el);
+    });
+  }
+  const box = document.getElementById('dash-chatbox');
+  if (!box) return;
+  box.innerHTML = '';
+  dashChatHistory.forEach(m => {
+    const div = document.createElement('div');
+    div.className = 'bubble ' + (m.role === 'user' ? 'u' : 'a');
+    div.textContent = m.content;
+    box.appendChild(div);
+  });
+  if (dashAiLoading) {
+    const div = document.createElement('div');
+    div.className = 'bubble a';
+    div.innerHTML = '<span class="ld"><span></span><span></span><span></span></span>';
+    box.appendChild(div);
+  }
+  box.scrollTop = box.scrollHeight;
+}
+
+async function sendDashMsg() {
+  const input = document.getElementById('dash-ci');
+  const msg = input?.value?.trim();
+  if (!msg || dashAiLoading) return;
+  input.value = '';
+  dashChatHistory.push({role:'user', content:msg});
+  dashAiLoading = true;
+  renderDashChat();
+  try {
+    const wt = loadWeightData();
+    const wtContext = wt.goals ? '\n\nBody composition goals: Target weight ' + wt.goals.targetWeight + wt.goals.unit + ', target body fat ' + wt.goals.targetBf + '%. Current: ' + (wt.entries[0] ? wt.entries[0].weight + wt.goals.unit + ', ' + (wt.entries[0].bf || '?') + '% BF' : 'not yet logged') + '.' : '';
+    const messages = dashChatHistory.slice(-14).map(m => ({role: m.role === 'assistant' ? 'assistant' : 'user', content: m.content}));
+    const resp = await fetch(AI_PROXY_URL + '/api/chat', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({messages, weekNumber: getWeekNumber(), extraContext: wtContext})
+    });
+    const data = await resp.json();
+    dashChatHistory.push({role:'assistant', content: data.error ? 'Error: ' + data.error : (data.reply || 'No response.')});
+  } catch(e) {
+    dashChatHistory.push({role:'assistant', content:'Could not reach AI. Check your connection.'});
+  }
+  dashAiLoading = false;
+  renderDashChat();
 }
 
 // ═══════════════════════════════════════════════════════════════
@@ -682,29 +936,18 @@ function renderProtocol() {
   const now = new Date();
   const pd = document.getElementById('proto-date');
   if (pd) pd.textContent = formatDate(now);
-
   const all = [...protocol.inj, ...protocol.supp];
   const done = all.filter(i => i.checked).length;
   const pct = all.length ? Math.round(done / all.length * 100) : 0;
-
-  const pp = document.getElementById('proto-pct');
-  if (pp) pp.textContent = pct + '%';
-  const pc = document.getElementById('proto-count');
-  if (pc) pc.textContent = done + '/' + all.length;
-  const pb = document.getElementById('proto-bar');
-  if (pb) pb.style.width = pct + '%';
-
+  const pp = document.getElementById('proto-pct'); if (pp) pp.textContent = pct + '%';
+  const pc = document.getElementById('proto-count'); if (pc) pc.textContent = done + '/' + all.length;
+  const pb = document.getElementById('proto-bar'); if (pb) pb.style.width = pct + '%';
   const rn = document.getElementById('proto-reset-notice');
   if (rn) {
-    const tomorrow = new Date(now);
-    tomorrow.setDate(tomorrow.getDate() + 1);
-    tomorrow.setHours(0, 0, 0, 0);
+    const tomorrow = new Date(now); tomorrow.setDate(tomorrow.getDate()+1); tomorrow.setHours(0,0,0,0);
     const ms = tomorrow - now;
-    const hrs = Math.floor(ms / 3600000);
-    const mins = Math.floor((ms % 3600000) / 60000);
-    rn.textContent = 'Resets in ' + hrs + 'h ' + mins + 'm · Checks clear automatically at midnight';
+    rn.textContent = 'Resets in ' + Math.floor(ms/3600000) + 'h ' + Math.floor((ms%3600000)/60000) + 'm · Checks clear automatically at midnight';
   }
-
   renderProtoTab('inj');
   renderProtoTab('supp');
 }
@@ -713,57 +956,31 @@ function renderProtoTab(type) {
   const el = document.getElementById('tab-' + type);
   if (!el) return;
   el.innerHTML = '';
-
   const items = protocol[type];
   const groups = {};
-  items.forEach(item => {
-    if (!groups[item.time]) groups[item.time] = [];
-    groups[item.time].push(item);
-  });
-
+  items.forEach(item => { if (!groups[item.time]) groups[item.time] = []; groups[item.time].push(item); });
   let hasContent = false;
   TIMING_ORDER.forEach(timing => {
     if (!groups[timing] || !groups[timing].length) return;
     hasContent = true;
     const tInfo = TIMING_GROUPS[timing] || {label:timing, icon:'•'};
     const groupDone = groups[timing].filter(i => i.checked).length;
-
     const section = document.createElement('div');
     section.className = 'timing-section';
-
     const header = document.createElement('div');
     header.className = 'timing-header';
-    header.innerHTML =
-      '<span class="timing-icon">' + tInfo.icon + '</span>' +
-      '<span class="timing-label">' + tInfo.label + '</span>' +
-      '<span class="timing-count">' + groupDone + '/' + groups[timing].length + '</span>';
+    header.innerHTML = '<span class="timing-icon">' + tInfo.icon + '</span><span class="timing-label">' + tInfo.label + '</span><span class="timing-count">' + groupDone + '/' + groups[timing].length + '</span>';
     section.appendChild(header);
-
     groups[timing].forEach(item => {
       const div = document.createElement('div');
       div.className = 'pi' + (item.checked ? ' done' : '');
-      div.innerHTML =
-        '<div class="pi-row">' +
-        '<div class="chk' + (item.checked ? ' on' : '') + '"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>' +
-        '<div style="flex:1">' +
-        '<div class="pi-name">' + esc(item.name) + '</div>' +
-        '<div class="pi-info">' + esc(item.dose) + (item.note ? ' · ' + esc(item.note) : '') + '</div>' +
-        '</div></div>';
-      div.onclick = () => {
-        item.checked = !item.checked;
-        saveProtocol(protocol);
-        renderProtocol();
-        renderDashboard();
-      };
+      div.innerHTML = '<div class="pi-row"><div class="chk' + (item.checked ? ' on' : '') + '"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div style="flex:1"><div class="pi-name">' + esc(item.name) + '</div><div class="pi-info">' + esc(item.dose) + (item.note ? ' · ' + esc(item.note) : '') + '</div></div></div>';
+      div.onclick = () => { item.checked = !item.checked; saveProtocol(protocol); renderProtocol(); renderDashboard(); };
       section.appendChild(div);
     });
-
     el.appendChild(section);
   });
-
-  if (!hasContent) {
-    el.innerHTML = '<div style="text-align:center;color:var(--text3);padding:30px;font-size:13px">No compounds. Add one in Protocol Manager.</div>';
-  }
+  if (!hasContent) el.innerHTML = '<div style="text-align:center;color:var(--text3);padding:30px;font-size:13px">No compounds. Add one in Protocol Manager.</div>';
 }
 
 function protoTab(tab, btn) {
@@ -774,6 +991,353 @@ function protoTab(tab, btn) {
 }
 
 // ═══════════════════════════════════════════════════════════════
+// WEIGHT TRACKING
+// ═══════════════════════════════════════════════════════════════
+function renderWeight() {
+  weightData = loadWeightData();
+  const hasGoals = weightData.goals !== null;
+
+  document.getElementById('wt-setup-card').style.display = hasGoals ? 'none' : 'block';
+  document.getElementById('wt-stats-row').style.display = hasGoals ? 'block' : 'none';
+
+  const unit = hasGoals ? weightData.goals.unit : 'lbs';
+  const logUnit = document.getElementById('wt-log-unit');
+  if (logUnit) logUnit.textContent = unit;
+
+  if (hasGoals) {
+    const g = weightData.goals;
+    const entries = weightData.entries;
+    const latest = entries.length ? entries[0] : null;
+    const startWeight = entries.length ? entries[entries.length-1].weight : g.currentWeight;
+    const curWeight = latest ? latest.weight : g.currentWeight;
+    const curBf = latest ? (latest.bf || null) : g.currentBf;
+    const totalLost = (startWeight - curWeight).toFixed(1);
+    const toGo = (curWeight - g.targetWeight).toFixed(1);
+    const bfToGo = curBf && g.targetBf ? (curBf - g.targetBf).toFixed(1) : null;
+    const totalRange = g.currentWeight - g.targetWeight;
+    const progress = totalRange > 0 ? Math.min(100, Math.max(0, ((g.currentWeight - curWeight) / totalRange * 100))).toFixed(0) : 0;
+
+    const cw = document.getElementById('wt-current-display');
+    if (cw) { cw.textContent = curWeight; cw.style.color = toGo > 0 ? 'var(--amber)' : 'var(--green)'; }
+    const cbf = document.getElementById('wt-bf-display');
+    if (cbf) { cbf.textContent = curBf ? curBf + '%' : '—'; cbf.style.color = bfToGo > 0 ? 'var(--amber)' : 'var(--green)'; }
+    const cl = document.getElementById('wt-lost-display');
+    if (cl) { cl.textContent = totalLost > 0 ? '-' + totalLost : '+' + Math.abs(totalLost); cl.style.color = totalLost > 0 ? 'var(--green)' : 'var(--red)'; }
+    const cp = document.getElementById('wt-progress-pct');
+    if (cp) cp.textContent = progress + '%';
+    const ctg = document.getElementById('wt-to-goal');
+    if (ctg) ctg.textContent = toGo > 0 ? toGo + ' ' + unit + ' to go' : 'Goal reached! 🎉';
+    const cbftg = document.getElementById('wt-bf-to-goal');
+    if (cbftg) cbftg.textContent = bfToGo ? (bfToGo > 0 ? bfToGo + '% to go' : 'Goal reached! 🎉') : 'Not set';
+    const ul = document.getElementById('wt-unit-lbl');
+    if (ul) ul.textContent = unit;
+    const ec = document.getElementById('wt-entries-count');
+    if (ec) ec.textContent = entries.length + ' check-in' + (entries.length !== 1 ? 's' : '');
+
+    const bs = document.getElementById('wt-bar-start');
+    if (bs) bs.textContent = g.currentWeight + ' ' + unit;
+    const bg = document.getElementById('wt-bar-goal');
+    if (bg) bg.textContent = g.targetWeight + ' ' + unit;
+    const pb = document.getElementById('wt-progress-bar');
+    if (pb) pb.style.width = progress + '%';
+
+    drawWeightChart(entries, g);
+    renderWeightHistory(entries, unit);
+    initWeightAI();
+  }
+
+  // Init weight AI chips
+  const wtChips = document.getElementById('wt-chips');
+  if (wtChips && wtChips.innerHTML === '') {
+    const chips = hasGoals ? [
+      "Am I on track for my goal?",
+      "How is my protocol helping weight loss?",
+      "What should I eat to hit my target?",
+      "How does BPC-157 affect body composition?",
+      "Best cardio for fat loss on my protocol?"
+    ] : [
+      "What's a realistic weight loss goal?",
+      "How does my protocol affect body composition?",
+      "What body fat % should I target?"
+    ];
+    chips.forEach(c => {
+      const el = document.createElement('div');
+      el.className = 'chip';
+      el.textContent = c;
+      el.onclick = () => { document.getElementById('wt-ci').value = c; sendWtMsg(); };
+      wtChips.appendChild(el);
+    });
+  }
+  renderWtChat();
+}
+
+function drawWeightChart(entries, goals) {
+  const canvas = document.getElementById('wt-chart');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const dpr = window.devicePixelRatio || 1;
+  const w = canvas.offsetWidth || 300;
+  const h = 100;
+  canvas.width = w * dpr;
+  canvas.height = h * dpr;
+  ctx.scale(dpr, dpr);
+  ctx.clearRect(0, 0, w, h);
+
+  const note = document.getElementById('wt-chart-note');
+
+  if (!entries || entries.length < 2) {
+    if (note) note.textContent = 'Log at least 2 check-ins to see your trend';
+    ctx.fillStyle = 'var(--text3)';
+    ctx.font = '11px DM Sans, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('Not enough data yet', w/2, h/2);
+    return;
+  }
+  if (note) note.textContent = entries.length + ' data points · Goal: ' + goals.targetWeight + ' ' + goals.unit;
+
+  const vals = [...entries].reverse().map(e => e.weight);
+  const minV = Math.min(...vals, goals.targetWeight) - 2;
+  const maxV = Math.max(...vals) + 2;
+  const pad = {l:8, r:8, t:10, b:10};
+  const cw = w - pad.l - pad.r;
+  const ch = h - pad.t - pad.b;
+
+  function xPos(i) { return pad.l + (i / (vals.length-1)) * cw; }
+  function yPos(v) { return pad.t + (1 - (v - minV) / (maxV - minV)) * ch; }
+
+  // Goal line
+  const goalY = yPos(goals.targetWeight);
+  ctx.setLineDash([4, 3]);
+  ctx.strokeStyle = 'rgba(184,146,42,0.35)';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(pad.l, goalY);
+  ctx.lineTo(w - pad.r, goalY);
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Area fill
+  const grad = ctx.createLinearGradient(0, pad.t, 0, h - pad.b);
+  grad.addColorStop(0, 'rgba(184,146,42,0.15)');
+  grad.addColorStop(1, 'rgba(184,146,42,0)');
+  ctx.beginPath();
+  ctx.moveTo(xPos(0), yPos(vals[0]));
+  for (let i = 1; i < vals.length; i++) ctx.lineTo(xPos(i), yPos(vals[i]));
+  ctx.lineTo(xPos(vals.length-1), h - pad.b);
+  ctx.lineTo(xPos(0), h - pad.b);
+  ctx.closePath();
+  ctx.fillStyle = grad;
+  ctx.fill();
+
+  // Line
+  ctx.beginPath();
+  ctx.moveTo(xPos(0), yPos(vals[0]));
+  for (let i = 1; i < vals.length; i++) ctx.lineTo(xPos(i), yPos(vals[i]));
+  ctx.strokeStyle = '#b8922a';
+  ctx.lineWidth = 2;
+  ctx.lineJoin = 'round';
+  ctx.stroke();
+
+  // Dots
+  vals.forEach((v, i) => {
+    ctx.beginPath();
+    ctx.arc(xPos(i), yPos(v), 3, 0, Math.PI*2);
+    ctx.fillStyle = '#b8922a';
+    ctx.fill();
+    ctx.strokeStyle = '#fff';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+  });
+}
+
+function renderWeightHistory(entries, unit) {
+  const el = document.getElementById('wt-history');
+  if (!el) return;
+  el.innerHTML = '';
+  if (!entries.length) {
+    el.innerHTML = '<div style="text-align:center;color:var(--text3);padding:20px;font-size:13px">No check-ins yet. Log your first weigh-in above.</div>';
+    return;
+  }
+  entries.slice(0, 20).forEach((e, i) => {
+    const prev = entries[i+1];
+    const delta = prev ? (e.weight - prev.weight).toFixed(1) : null;
+    const div = document.createElement('div');
+    div.className = 'wt-entry';
+    div.innerHTML =
+      '<div class="wt-entry-date">' + esc(e.dateStr) + '</div>' +
+      '<div class="wt-entry-vals">' +
+      '<div class="wt-entry-weight">' + esc(e.weight) + ' <span style="font-size:11px;font-weight:400;color:var(--text3)">' + esc(unit) + '</span></div>' +
+      (e.bf ? '<div class="wt-entry-bf">' + esc(e.bf) + '% body fat</div>' : '') +
+      (e.notes ? '<div style="font-size:10px;color:var(--text3);margin-top:2px">' + esc(e.notes) + '</div>' : '') +
+      '</div>' +
+      (delta !== null ? '<div class="wt-entry-delta" style="color:' + (delta < 0 ? 'var(--green)' : delta > 0 ? 'var(--red)' : 'var(--text3)') + '">' + (delta < 0 ? '' : '+') + delta + '</div>' : '');
+    el.appendChild(div);
+  });
+}
+
+function saveWeightGoals() {
+  const cw = parseFloat(document.getElementById('wt-cur-weight').value);
+  const tw = parseFloat(document.getElementById('wt-goal-weight').value);
+  const tbf = parseFloat(document.getElementById('wt-goal-bf').value);
+  const cbf = parseFloat(document.getElementById('wt-cur-bf').value);
+  const unit = document.getElementById('wt-unit').value;
+  const timeline = parseInt(document.getElementById('wt-timeline').value);
+  const extra = document.getElementById('wt-extra-goal').value.trim();
+  if (!cw || !tw) { alert('Please enter your current and target weight.'); return; }
+  weightData.goals = { currentWeight: cw, targetWeight: tw, targetBf: tbf || null, currentBf: cbf || null, unit, timeline, extra: extra || '', setDate: todayKey() };
+  saveWeightData(weightData);
+  renderWeight();
+  // Greet with AI after goals set
+  const greeting = "Goals saved! Here's your plan:\n\n" +
+    "• Target: " + tw + unit + " (from " + cw + unit + " — " + (cw - tw).toFixed(1) + unit + " to lose)\n" +
+    (tbf ? "• Body fat target: " + tbf + "% (from " + (cbf || '?') + "%)\n" : '') +
+    "• Timeline: " + timeline + " weeks\n\n" +
+    "Your peptide stack (BPC-157, CJC-1295/Ipamorelin, TB-500) actively supports body recomposition. I'll track your progress and give you weekly feedback. Log your weigh-ins regularly for the best insights.";
+  wtChatHistory = [{role:'assistant', content: greeting}];
+  renderWtChat();
+}
+
+function editWeightGoals() {
+  document.getElementById('wt-setup-card').style.display = 'block';
+  if (weightData.goals) {
+    const g = weightData.goals;
+    document.getElementById('wt-cur-weight').value = g.currentWeight || '';
+    document.getElementById('wt-goal-weight').value = g.targetWeight || '';
+    document.getElementById('wt-goal-bf').value = g.targetBf || '';
+    document.getElementById('wt-cur-bf').value = g.currentBf || '';
+    document.getElementById('wt-unit').value = g.unit || 'lbs';
+    document.getElementById('wt-timeline').value = g.timeline || 12;
+    document.getElementById('wt-extra-goal').value = g.extra || '';
+  }
+}
+
+function handleScaleUpload(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    scaleImgData = e.target.result;
+    document.getElementById('wt-preview-img').src = scaleImgData;
+    document.getElementById('wt-img-preview').style.display = 'block';
+  };
+  reader.readAsDataURL(file);
+}
+
+function logWeighIn() {
+  const wVal = parseFloat(document.getElementById('wt-log-weight').value);
+  if (!wVal) { alert('Please enter your weight.'); return; }
+  const bf = parseFloat(document.getElementById('wt-log-bf').value) || null;
+  const notes = document.getElementById('wt-log-notes').value.trim();
+  const now = new Date();
+  const entry = {
+    dateKey: todayKey(),
+    dateStr: formatDateShort(now),
+    weight: wVal,
+    bf: bf,
+    notes: notes || '',
+    img: scaleImgData || null,
+    timestamp: Date.now()
+  };
+  // Remove existing entry for today
+  weightData.entries = weightData.entries.filter(e => e.dateKey !== todayKey());
+  weightData.entries.unshift(entry);
+  saveWeightData(weightData);
+  // Reset form
+  document.getElementById('wt-log-weight').value = '';
+  document.getElementById('wt-log-bf').value = '';
+  document.getElementById('wt-log-notes').value = '';
+  document.getElementById('wt-img-preview').style.display = 'none';
+  document.getElementById('wt-img-input').value = '';
+  scaleImgData = null;
+  renderWeight();
+  renderDashboard();
+  // AI feedback on weigh-in
+  const unit = weightData.goals ? weightData.goals.unit : 'lbs';
+  const prev = weightData.entries[1];
+  let aiMsg = "Logged: " + wVal + unit + (bf ? ', ' + bf + '% BF' : '') + '.';
+  if (prev) {
+    const delta = (wVal - prev.weight).toFixed(1);
+    aiMsg += delta < 0 ? ' Down ' + Math.abs(delta) + unit + ' since last check-in. Keep going.' : delta > 0 ? ' Up ' + delta + unit + ' — stay the course, fluctuations are normal.' : ' Same as last check-in.';
+  }
+  if (weightData.goals) {
+    const toGo = (wVal - weightData.goals.targetWeight).toFixed(1);
+    if (toGo > 0) aiMsg += '\n\n' + toGo + unit + ' remaining to your goal of ' + weightData.goals.targetWeight + unit + '.';
+    else aiMsg += '\n\n🎉 You\'ve hit your weight goal!';
+  }
+  wtChatHistory.push({role:'assistant', content: aiMsg});
+  renderWtChat();
+}
+
+// ─── WEIGHT AI CHAT ───
+function initWeightAI() {
+  if (wtChatHistory.length === 0 && weightData.goals) {
+    const g = weightData.goals;
+    const entries = weightData.entries;
+    const latest = entries[0];
+    wtChatHistory = [{
+      role: 'assistant',
+      content: "Weight tracking is set up. Goal: " + g.targetWeight + g.unit + " (target BF: " + (g.targetBf || 'not set') + "%).\n\n" +
+        (latest ? "Last check-in: " + latest.weight + g.unit + (latest.bf ? ', ' + latest.bf + '% BF' : '') + ".\n\n" : '') +
+        "Ask me anything about your body composition, nutrition, or how your protocol supports your goals."
+    }];
+  }
+}
+
+function renderWtChat() {
+  const box = document.getElementById('wt-chatbox');
+  if (!box) return;
+  box.innerHTML = '';
+  if (!wtChatHistory.length) {
+    const div = document.createElement('div');
+    div.className = 'bubble a';
+    div.textContent = "Set your goals above and I'll help you track and optimize your body composition journey.";
+    box.appendChild(div);
+    box.scrollTop = box.scrollHeight;
+    return;
+  }
+  wtChatHistory.forEach(m => {
+    const div = document.createElement('div');
+    div.className = 'bubble ' + (m.role === 'user' ? 'u' : 'a');
+    div.textContent = m.content;
+    box.appendChild(div);
+  });
+  if (wtAiLoading) {
+    const div = document.createElement('div');
+    div.className = 'bubble a';
+    div.innerHTML = '<span class="ld"><span></span><span></span><span></span></span>';
+    box.appendChild(div);
+  }
+  box.scrollTop = box.scrollHeight;
+}
+
+async function sendWtMsg() {
+  const input = document.getElementById('wt-ci');
+  const msg = input?.value?.trim();
+  if (!msg || wtAiLoading) return;
+  input.value = '';
+  wtChatHistory.push({role:'user', content:msg});
+  wtAiLoading = true;
+  renderWtChat();
+  try {
+    const g = weightData.goals;
+    const entries = weightData.entries;
+    const latest = entries[0];
+    const wtContext = g ? '\n\nBody composition context: Current weight ' + (latest ? latest.weight : g.currentWeight) + g.unit + (latest && latest.bf ? ', ' + latest.bf + '% BF' : '') + '. Target: ' + g.targetWeight + g.unit + (g.targetBf ? ', ' + g.targetBf + '% BF' : '') + '. Timeline: ' + g.timeline + ' weeks. Total check-ins: ' + entries.length + '.' + (g.extra ? ' Additional goals: ' + g.extra : '') : '';
+    const messages = wtChatHistory.slice(-14).map(m => ({role: m.role === 'assistant' ? 'assistant' : 'user', content: m.content}));
+    const resp = await fetch(AI_PROXY_URL + '/api/chat', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({messages, weekNumber: getWeekNumber(), extraContext: wtContext})
+    });
+    const data = await resp.json();
+    wtChatHistory.push({role:'assistant', content: data.error ? 'Error: ' + data.error : (data.reply || 'No response.')});
+  } catch(e) {
+    wtChatHistory.push({role:'assistant', content:'Could not reach AI. Check your connection.'});
+  }
+  wtAiLoading = false;
+  renderWtChat();
+}
+
+// ═══════════════════════════════════════════════════════════════
 // PROTOCOL MANAGER
 // ═══════════════════════════════════════════════════════════════
 function renderManage() {
@@ -781,31 +1345,17 @@ function renderManage() {
   if (!el) return;
   const items = protocol[manageTab];
   el.innerHTML = '';
-
-  if (!items.length) {
-    el.innerHTML = '<div style="text-align:center;color:var(--text3);padding:30px;font-size:13px">No compounds yet. Add one above.</div>';
-    return;
-  }
-
+  if (!items.length) { el.innerHTML = '<div style="text-align:center;color:var(--text3);padding:30px;font-size:13px">No compounds yet. Add one above.</div>'; return; }
   items.forEach(item => {
     const tInfo = TIMING_GROUPS[item.time] || {icon:'•', label:item.time};
     const div = document.createElement('div');
     div.className = 'pm-item';
-    div.innerHTML =
-      '<div class="pm-info">' +
-      '<div class="pm-name">' + esc(item.name) + '</div>' +
-      '<div class="pm-meta">' + esc(item.dose) + ' · ' + tInfo.icon + ' ' + tInfo.label + (item.note ? ' · ' + esc(item.note) : '') + '</div>' +
-      '</div>' +
-      '<div class="pm-actions">' +
-      '<button class="icon-btn edit" title="Edit compound"><svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>' +
-      '<button class="icon-btn del" title="Delete compound"><svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a1 1 0 011-1h4a1 1 0 011 1v2"/></svg></button>' +
-      '</div>';
+    div.innerHTML = '<div class="pm-info"><div class="pm-name">' + esc(item.name) + '</div><div class="pm-meta">' + esc(item.dose) + ' · ' + tInfo.icon + ' ' + tInfo.label + (item.note ? ' · ' + esc(item.note) : '') + '</div></div><div class="pm-actions"><button class="icon-btn edit" title="Edit"><svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button><button class="icon-btn del" title="Delete"><svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a1 1 0 011-1h4a1 1 0 011 1v2"/></svg></button></div>';
     div.querySelector('.edit').onclick = () => openEdit(item.id, manageTab);
     div.querySelector('.del').onclick = () => deleteItem(item.id, manageTab);
     el.appendChild(div);
   });
 }
-
 function manTab(tab, btn) {
   manageTab = tab;
   document.querySelectorAll('#pg-manage .tb2').forEach(t => t.classList.remove('on'));
@@ -814,20 +1364,16 @@ function manTab(tab, btn) {
   if (addBtn) addBtn.onclick = () => openAdd(tab);
   renderManage();
 }
-
 function openAdd(type) {
-  editId = null;
-  editType = type || manageTab;
+  editId = null; editType = type || manageTab;
   document.getElementById('modal-title').textContent = 'Add Compound';
   ['f-name','f-dose','f-note'].forEach(id => { document.getElementById(id).value = ''; });
   document.getElementById('f-time').value = 'morning';
   document.getElementById('f-type').value = editType;
   document.getElementById('modal').classList.add('on');
 }
-
 function openEdit(id, type) {
-  editId = id;
-  editType = type;
+  editId = id; editType = type;
   const item = protocol[type].find(i => i.id === id);
   if (!item) return;
   document.getElementById('modal-title').textContent = 'Edit Compound';
@@ -838,27 +1384,13 @@ function openEdit(id, type) {
   document.getElementById('f-type').value = type;
   document.getElementById('modal').classList.add('on');
 }
-
-function closeModal() {
-  document.getElementById('modal').classList.remove('on');
-}
-
+function closeModal() { document.getElementById('modal').classList.remove('on'); }
 function saveModal() {
   const name = document.getElementById('f-name').value.trim();
   if (!name) { alert('Please enter a compound name.'); return; }
   const type = document.getElementById('f-type').value;
-  const item = {
-    id: editId || 'c' + Date.now(),
-    name,
-    dose: document.getElementById('f-dose').value.trim() || '—',
-    time: document.getElementById('f-time').value,
-    note: document.getElementById('f-note').value.trim() || '',
-    checked: false
-  };
-  if (editId) {
-    protocol.inj  = protocol.inj.filter(i => i.id !== editId);
-    protocol.supp = protocol.supp.filter(i => i.id !== editId);
-  }
+  const item = { id: editId || 'c' + Date.now(), name, dose: document.getElementById('f-dose').value.trim() || '—', time: document.getElementById('f-time').value, note: document.getElementById('f-note').value.trim() || '', checked: false };
+  if (editId) { protocol.inj = protocol.inj.filter(i => i.id !== editId); protocol.supp = protocol.supp.filter(i => i.id !== editId); }
   protocol[type].push(item);
   saveProtocol(protocol);
   closeModal();
@@ -866,7 +1398,6 @@ function saveModal() {
   renderProtocol();
   renderDashboard();
 }
-
 function deleteItem(id, type) {
   if (!confirm('Remove this compound from your protocol?')) return;
   protocol[type] = protocol[type].filter(i => i.id !== id);
@@ -884,47 +1415,29 @@ function renderCalendar() {
   const year = now.getFullYear();
   const month = now.getMonth();
   const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-
   const ml = document.getElementById('cal-month-label');
   if (ml) ml.textContent = MONTHS[month] + ' ' + year;
-
   const grid = document.getElementById('cal-grid');
   if (!grid) return;
   grid.innerHTML = '';
   grid.className = 'cgrid';
-
-  ['Su','Mo','Tu','We','Th','Fr','Sa'].forEach(d => {
-    const el = document.createElement('div');
-    el.className = 'cday hdr';
-    el.textContent = d;
-    grid.appendChild(el);
-  });
-
+  ['Su','Mo','Tu','We','Th','Fr','Sa'].forEach(d => { const el = document.createElement('div'); el.className = 'cday hdr'; el.textContent = d; grid.appendChild(el); });
   const firstDay = new Date(year, month, 1).getDay();
-  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const daysInMonth = new Date(year, month+1, 0).getDate();
   const today = now.getDate();
   const streaks = loadStreaks();
-
   for (let i = 0; i < firstDay; i++) grid.appendChild(document.createElement('div'));
-
   for (let d = 1; d <= daysInMonth; d++) {
     const el = document.createElement('div');
     el.textContent = d;
     const key = year + '-' + String(month+1).padStart(2,'0') + '-' + String(d).padStart(2,'0');
-    if (d === today) {
-      el.className = 'cday today';
-    } else if (streaks.history && streaks.history[key] === 'done') {
-      el.className = 'cday done';
-    } else if (streaks.history && streaks.history[key] === 'partial') {
-      el.className = 'cday partial';
-    } else if (d < today) {
-      el.className = 'cday past';
-    } else {
-      el.className = 'cday fut';
-    }
+    if (d === today) el.className = 'cday today';
+    else if (streaks.history && streaks.history[key] === 'done') el.className = 'cday done';
+    else if (streaks.history && streaks.history[key] === 'partial') el.className = 'cday partial';
+    else if (d < today) el.className = 'cday past';
+    else el.className = 'cday fut';
     grid.appendChild(el);
   }
-
   const sc = document.getElementById('streak-current');
   const sb = document.getElementById('streak-best');
   const sw = document.getElementById('streak-week');
@@ -932,31 +1445,21 @@ function renderCalendar() {
   if (sb) sb.textContent = streaks.best;
   if (sw) {
     const weekDays = [];
-    for (let i = 6; i >= 0; i--) {
-      const d = new Date(now);
-      d.setDate(d.getDate() - i);
-      weekDays.push(d.toISOString().split('T')[0]);
-    }
+    for (let i = 6; i >= 0; i--) { const d = new Date(now); d.setDate(d.getDate()-i); weekDays.push(d.toISOString().split('T')[0]); }
     const doneDays = weekDays.filter(k => streaks.history && (streaks.history[k] === 'done' || streaks.history[k] === 'partial')).length;
-    sw.textContent = Math.round(doneDays / 7 * 100) + '%';
+    sw.textContent = Math.round(doneDays/7*100) + '%';
   }
 }
 
 // ═══════════════════════════════════════════════════════════════
 // WELLNESS JOURNAL
 // ═══════════════════════════════════════════════════════════════
-const JM = [
-  {k:'e', l:'Energy', c:'var(--green)'},
-  {k:'l', l:'Libido', c:'var(--gold)'},
-  {k:'s', l:'Sleep',  c:'var(--blue)'},
-  {k:'m', l:'Mood',   c:'var(--amber)'}
-];
+const JM = [{k:'e',l:'Energy',c:'var(--green)'},{k:'l',l:'Libido',c:'var(--gold)'},{k:'s',l:'Sleep',c:'var(--blue)'},{k:'m',l:'Mood',c:'var(--amber)'}];
 
 function renderJournal() {
   const el = document.getElementById('j-scores');
   if (!el) return;
   el.innerHTML = '';
-
   JM.forEach(m => {
     const row = document.createElement('div');
     row.className = 'jsrow';
@@ -966,7 +1469,7 @@ function renderJournal() {
       const d = document.createElement('div');
       d.className = 'jsd';
       d.style.borderColor = jScores[m.k] >= i ? m.c : 'var(--border2)';
-      d.style.background  = jScores[m.k] >= i ? m.c + '20' : 'var(--bg3)';
+      d.style.background = jScores[m.k] >= i ? m.c + '20' : '#fff';
       d.onclick = (function(v, k) { return function() { jScores[k] = v; renderJournal(); }; })(i, m.k);
       dots.appendChild(d);
     }
@@ -978,7 +1481,6 @@ function renderJournal() {
     row.appendChild(val);
     el.appendChild(row);
   });
-
   const hist = document.getElementById('j-history');
   if (!hist) return;
   hist.innerHTML = '';
@@ -986,16 +1488,7 @@ function renderJournal() {
     const div = document.createElement('div');
     div.className = 'card2';
     div.style.marginBottom = '8px';
-    div.innerHTML =
-      '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">' +
-      '<span style="font-size:13px;font-family:\'Cormorant Garamond\',serif;font-weight:600">' + esc(e.date) + '</span>' +
-      '<div style="display:flex;gap:8px">' +
-      '<span style="font-size:10px;color:var(--green)">E' + e.e + '</span>' +
-      '<span style="font-size:10px;color:var(--gold)">L' + e.l + '</span>' +
-      '<span style="font-size:10px;color:var(--blue)">S' + e.s + '</span>' +
-      '<span style="font-size:10px;color:var(--amber)">M' + e.m + '</span>' +
-      '</div></div>' +
-      '<div style="font-size:11px;color:var(--text3)">' + esc(e.notes) + '</div>';
+    div.innerHTML = '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><span style="font-size:13px;font-family:\'Cormorant Garamond\',serif;font-weight:600">' + esc(e.date) + '</span><div style="display:flex;gap:8px"><span style="font-size:10px;color:var(--green)">E' + e.e + '</span><span style="font-size:10px;color:var(--gold)">L' + e.l + '</span><span style="font-size:10px;color:var(--blue)">S' + e.s + '</span><span style="font-size:10px;color:var(--amber)">M' + e.m + '</span></div></div><div style="font-size:11px;color:var(--text3)">' + esc(e.notes) + '</div>';
     hist.appendChild(div);
   });
 }
@@ -1021,23 +1514,12 @@ function renderBW() {
   const tc = {green:'tg', amber:'ta', red:'tr', blue:'tb'};
   const tl = {green:'Optimal', amber:'Average', red:'Flagged', blue:'Good'};
   const pp = {green:85, amber:50, red:35, blue:65};
-
   function mkCard(item) {
     const div = document.createElement('div');
     div.className = 'bwc';
-    div.innerHTML =
-      '<div style="display:flex;justify-content:space-between;align-items:flex-start">' +
-      '<div>' +
-      '<div style="font-size:9px;color:var(--text2);margin-bottom:3px;text-transform:uppercase;letter-spacing:.06em">' + esc(item.n) + '</div>' +
-      '<div class="bwv" style="color:' + sc[item.s] + '">' + esc(String(item.v)) + ' <span style="font-size:10px;font-weight:400;color:var(--text3)">' + esc(item.u) + '</span></div>' +
-      '<div style="font-size:9px;color:var(--text3);margin-top:2px">Target: ' + esc(item.t) + '</div>' +
-      '</div>' +
-      '<div class="tag ' + tc[item.s] + '">' + tl[item.s] + '</div>' +
-      '</div>' +
-      '<div class="pt" style="margin-top:8px"><div class="pf" style="width:' + pp[item.s] + '%;background:' + sc[item.s] + '"></div></div>';
+    div.innerHTML = '<div style="display:flex;justify-content:space-between;align-items:flex-start"><div><div style="font-size:9px;color:var(--text2);margin-bottom:3px;text-transform:uppercase;letter-spacing:.06em">' + esc(item.n) + '</div><div class="bwv" style="color:' + sc[item.s] + '">' + esc(String(item.v)) + ' <span style="font-size:10px;font-weight:400;color:var(--text3)">' + esc(item.u) + '</span></div><div style="font-size:9px;color:var(--text3);margin-top:2px">Target: ' + esc(item.t) + '</div></div><div class="tag ' + tc[item.s] + '">' + tl[item.s] + '</div></div><div class="pt" style="margin-top:8px"><div class="pf" style="width:' + pp[item.s] + '%;background:' + sc[item.s] + '"></div></div>';
     return div;
   }
-
   ['heart','hormone','metabolic'].forEach(cat => {
     const el = document.getElementById('bw-' + cat);
     if (!el) return;
@@ -1047,13 +1529,8 @@ function renderBW() {
 }
 
 // ═══════════════════════════════════════════════════════════════
-// AI COACH — calls secure proxy server (no API key needed by user)
+// AI COACH (full page)
 // ═══════════════════════════════════════════════════════════════
-
-// Set this to your deployed Render.com URL after deployment
-// e.g. 'https://pbv-companion-ai.onrender.com'
-const AI_PROXY_URL = 'https://pbv-companion-ai.onrender.com';
-
 const CHIPS = [
   "What's my morning protocol?",
   "Explain my bedtime stack",
@@ -1062,11 +1539,10 @@ const CHIPS = [
   "When will testosterone improve?",
   "Should I add HCG now?",
   "Is SHBG too high?",
-  "Best time for CJC-1295?"
+  "Best time for CJC-1295?",
+  "Am I on track for my weight goal?",
+  "How does my protocol help fat loss?"
 ];
-
-
-
 
 function renderAI() {
   const chips = document.getElementById('ai-chips');
@@ -1089,7 +1565,7 @@ function renderChat() {
   chatHistory.forEach(m => {
     const div = document.createElement('div');
     div.className = 'bubble ' + (m.role === 'user' ? 'u' : 'a');
-    div.textContent = m.content; // textContent prevents XSS
+    div.textContent = m.content;
     box.appendChild(div);
   });
   if (aiLoading) {
@@ -1105,37 +1581,24 @@ async function sendMsg() {
   const input = document.getElementById('ci');
   const msg = input?.value?.trim();
   if (!msg || aiLoading) return;
-
   input.value = '';
   chatHistory.push({role:'user', content:msg});
   aiLoading = true;
   renderChat();
-
   try {
-    const messages = chatHistory.slice(-14).map(m => ({
-      role: m.role === 'assistant' ? 'assistant' : 'user',
-      content: m.content
-    }));
-
+    const wt = loadWeightData();
+    const wtContext = wt.goals ? '\n\nBody composition: Target ' + wt.goals.targetWeight + wt.goals.unit + (wt.goals.targetBf ? ', ' + wt.goals.targetBf + '% BF' : '') + '. Current: ' + (wt.entries[0] ? wt.entries[0].weight + wt.goals.unit + (wt.entries[0].bf ? ', ' + wt.entries[0].bf + '% BF' : '') : 'not yet logged') + '.' : '';
+    const messages = chatHistory.slice(-14).map(m => ({role: m.role === 'assistant' ? 'assistant' : 'user', content: m.content}));
     const resp = await fetch(AI_PROXY_URL + '/api/chat', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        messages,
-        weekNumber: getWeekNumber()
-      })
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({messages, weekNumber: getWeekNumber(), extraContext: wtContext})
     });
-
     const data = await resp.json();
-    if (data.error) {
-      chatHistory.push({role:'assistant', content:'Error: ' + data.error});
-    } else {
-      chatHistory.push({role:'assistant', content: data.reply || 'No response received.'});
-    }
-  } catch (e) {
+    if (data.error) chatHistory.push({role:'assistant', content:'Error: ' + data.error});
+    else chatHistory.push({role:'assistant', content: data.reply || 'No response received.'});
+  } catch(e) {
     chatHistory.push({role:'assistant', content:'Could not reach AI service. Check your connection and try again.'});
   }
-
   aiLoading = false;
   renderChat();
 }
@@ -1157,12 +1620,10 @@ function checkMidnightReset() {
     renderCalendar();
   }
 }
-
-// Check every 60 seconds for midnight rollover
 setInterval(checkMidnightReset, 60000);
 
 // ═══════════════════════════════════════════════════════════════
-// SERVICE WORKER (PWA offline support)
+// SERVICE WORKER
 // ═══════════════════════════════════════════════════════════════
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
