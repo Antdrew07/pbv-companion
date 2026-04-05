@@ -6,6 +6,9 @@ const fetch = require('node-fetch');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Trust Render's reverse proxy so rate limiting works correctly
+app.set('trust proxy', 1);
+
 // ─── CORS ────────────────────────────────────────────────────────────────────
 // Allow requests from GitHub Pages and any localhost port (for dev)
 const ALLOWED_ORIGINS = [
