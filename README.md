@@ -4,36 +4,54 @@ A Progressive Web App (PWA) designed as a personal health, peptide, and suppleme
 
 ## Features
 
-- **Daily Protocol Tracker**: Track morning, evening, and bedtime injections and supplements.
-- **Optimized Peptide Timing**: Built-in timing logic (e.g., CJC-1295/Ipamorelin at bedtime for optimal GH pulses, Semax/BPC-157 in the morning).
-- **Midnight Auto-Reset**: Daily checklists automatically clear at midnight while preserving your streak data.
-- **AI Health Coach**: Connect your OpenAI API key to chat with an AI coach that knows your exact bloodwork, protocol, and goals.
+- **Daily Protocol Tracker**: Track morning, evening, and bedtime injections and supplements with optimized timing.
+- **Optimized Peptide Timing**: CJC-1295/Ipamorelin at bedtime for optimal GH pulses, Semax/BPC-157 fasted in the morning, Kisspeptin-10 and TB-500 in the evening.
+- **Midnight Auto-Reset**: Daily checklists automatically clear at midnight while preserving streak data.
+- **AI Health Coach**: Fully integrated — pre-loaded with Yahya's bloodwork, protocol, and goals. No API key required by the user. Works via a secure backend proxy.
 - **Wellness Journal**: Track daily energy, libido, sleep, and mood scores.
 - **Bloodwork Dashboard**: Quick reference for key biomarkers (LDL, Testosterone, Ferritin, etc.).
-- **Protocol Manager**: Add, edit, or remove custom compounds from your stack.
+- **Protocol Manager**: Add, edit, or remove custom compounds from the stack.
 - **Offline Support**: Works as a standalone PWA on iOS and Android.
+
+## Architecture
+
+```
+[Yahya's Phone / Browser]
+        |
+        | HTTPS POST /api/chat
+        v
+[Render.com — server/server.js]   <- API key lives here, never exposed
+        |
+        | HTTPS POST
+        v
+[OpenAI API — gpt-4o-mini]
+```
+
+The frontend (`index.html`) never touches the OpenAI API key directly. All AI requests go through the proxy server which holds the key as a secure environment variable.
 
 ## Setup & Installation
 
-Since this is a client-side PWA, no server setup is required.
+### Frontend (GitHub Pages)
 
-1. Clone the repository or download the files.
-2. Host the files on any static web server (e.g., GitHub Pages, Vercel, Netlify).
-3. Open the URL on your mobile device.
-4. Tap **Share > Add to Home Screen** to install it as a native app.
+The app is automatically deployed via GitHub Pages. Open the URL on your mobile device and tap **Share > Add to Home Screen** to install it as a native app.
 
-## AI Coach Configuration
+### Backend Proxy Server (Render.com)
 
-To use the AI Coach feature:
-1. Navigate to the **AI Coach** tab.
-2. Enter your OpenAI API key (`sk-...`).
-3. The key is stored securely in your device's `localStorage` and is only sent directly to OpenAI's API. It is never stored on any other server.
+1. Go to [render.com](https://render.com) and create a new **Web Service**.
+2. Connect this GitHub repository.
+3. Set **Root Directory** to `server`.
+4. Set **Build Command** to `npm install`.
+5. Set **Start Command** to `npm start`.
+6. Add the environment variable: `OPENAI_API_KEY` = your OpenAI key.
+7. Copy the deployed URL (e.g. `https://pbv-companion-ai.onrender.com`).
+8. Update `AI_PROXY_URL` in `index.html` to match your Render URL.
 
 ## Technical Details
 
-- **Frontend**: Pure HTML, CSS, and vanilla JavaScript.
-- **Storage**: All data (protocol state, journal entries, streaks, custom compounds) is saved locally using `localStorage`.
-- **Security**: User inputs are safely escaped to prevent XSS vulnerabilities.
+- **Frontend**: Pure HTML, CSS, and vanilla JavaScript (single file PWA).
+- **Backend**: Node.js + Express proxy server with CORS and rate limiting.
+- **Storage**: All data (protocol state, journal entries, streaks, custom compounds) saved locally via `localStorage`.
+- **Security**: User inputs safely escaped (XSS prevention). API key never exposed to client.
 
 ## License
 
