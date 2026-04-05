@@ -94,13 +94,50 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 .field select option{background:#fff}
 .mrow{display:flex;gap:8px;margin-top:4px}
 .cgrid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px}
-.cday{aspect-ratio:1;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:11px;cursor:pointer}
-.cday.hdr{color:var(--text3);font-size:9px;cursor:default;font-weight:600;text-transform:uppercase;letter-spacing:.04em}
-.cday.done{background:rgba(184,146,42,.12);color:var(--gold);font-weight:500}
-.cday.partial{background:rgba(192,120,32,.1);color:var(--amber)}
-.cday.today{border:1.5px solid var(--gold);color:var(--gold);font-weight:700;background:rgba(184,146,42,.05)}
-.cday.past{background:var(--bg3);color:var(--text3);border-radius:5px}
-.cday.fut{color:var(--text3)}
+.cday{aspect-ratio:1;border-radius:6px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding-top:6px;font-size:11px;cursor:pointer;position:relative;transition:all .12s;user-select:none}
+.cday:hover:not(.hdr):not(.fut){transform:scale(1.04);z-index:2}
+.cday.hdr{color:var(--text3);font-size:9px;cursor:default;font-weight:600;text-transform:uppercase;letter-spacing:.04em;padding-top:0;justify-content:center}
+.cday.done{background:rgba(184,146,42,.13);color:var(--gold);font-weight:600}
+.cday.partial{background:rgba(192,120,32,.1);color:var(--amber);font-weight:500}
+.cday.today{border:1.5px solid var(--gold);color:var(--gold);font-weight:700;background:rgba(184,146,42,.06)}
+.cday.past{background:var(--bg3);color:var(--text3)}
+.cday.fut{color:var(--text3);opacity:.5;cursor:default}
+.cday-num{font-size:11px;line-height:1}
+.cday-dots{display:flex;gap:2px;margin-top:3px;justify-content:center;flex-wrap:wrap;max-width:90%}
+.cdot{width:4px;height:4px;border-radius:50%;flex-shrink:0}
+/* ─── CALENDAR DETAIL MODAL ─── */
+.cal-modal{background:#fff;border:1px solid var(--goldborder);border-radius:14px;padding:22px;width:92%;max-width:400px;max-height:85vh;overflow-y:auto;box-shadow:0 8px 32px rgba(0,0,0,0.15)}
+.cal-modal h3{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;margin-bottom:4px}
+.cal-modal-sub{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:14px}
+.cal-section{margin-bottom:14px}
+.cal-section-title{font-size:9px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;padding-bottom:4px;border-bottom:1px solid var(--border2)}
+.cal-item-row{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid var(--border);font-size:12px}
+.cal-item-row:last-child{border-bottom:none}
+.cal-check{width:14px;height:14px;border-radius:3px;flex-shrink:0}
+.cal-check.done{background:var(--gold)}
+.cal-check.miss{background:var(--bg4);border:1px solid var(--border3)}
+.cal-score-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
+.cal-score-chip{padding:3px 9px;border-radius:3px;font-size:10px;font-weight:500}
+/* ─── MONTHLY STATS ─── */
+.mstats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
+.mstat{background:var(--bg2);border:1px solid var(--border2);border-radius:10px;padding:12px 8px;text-align:center;box-shadow:0 1px 3px rgba(0,0,0,0.04)}
+.mstat-val{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;line-height:1}
+.mstat-lbl{font-size:9px;color:var(--text3);margin-top:3px;text-transform:uppercase;letter-spacing:.07em}
+/* ─── NOTIFICATION SETTINGS ─── */
+.notif-row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border2)}
+.notif-row:last-child{border-bottom:none}
+.notif-info{flex:1}
+.notif-label{font-size:13px;font-weight:400}
+.notif-sub{font-size:10px;color:var(--text3);margin-top:1px}
+.notif-time{font-size:12px;color:var(--text2);border:1px solid var(--border2);border-radius:5px;padding:4px 8px;background:var(--bg3);cursor:pointer;font-family:'DM Sans',sans-serif}
+.notif-time:focus{border-color:var(--gold);outline:none}
+.toggle{position:relative;width:38px;height:22px;flex-shrink:0}
+.toggle input{opacity:0;width:0;height:0;position:absolute}
+.toggle-slider{position:absolute;inset:0;background:var(--border3);border-radius:11px;cursor:pointer;transition:.2s}
+.toggle-slider:before{content:'';position:absolute;width:16px;height:16px;left:3px;top:3px;background:#fff;border-radius:50%;transition:.2s;box-shadow:0 1px 3px rgba(0,0,0,0.2)}
+.toggle input:checked + .toggle-slider{background:var(--gold)}
+.toggle input:checked + .toggle-slider:before{transform:translateX(16px)}
+.notif-status{font-size:10px;padding:4px 10px;border-radius:3px;font-weight:500;text-transform:uppercase;letter-spacing:.04em}
 .jsrow{display:flex;align-items:center;margin-bottom:12px;gap:10px}
 .jsdots{display:flex;gap:5px}
 .jsd{width:28px;height:28px;border-radius:5px;cursor:pointer;border:1.5px solid var(--border2);background:#fff;transition:all .15s}
@@ -439,19 +476,54 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
       <div class="gold-line"></div>
       <div class="hsub" id="cal-month-label"></div>
     </div>
-    <div style="display:flex;gap:8px;align-items:center">
-      <div style="display:flex;align-items:center;gap:3px;font-size:9px;color:var(--gold);text-transform:uppercase;letter-spacing:.04em"><span style="width:6px;height:6px;border-radius:1px;background:rgba(201,168,76,.3);display:inline-block"></span>Done</div>
-      <div style="display:flex;align-items:center;gap:3px;font-size:9px;color:var(--amber);text-transform:uppercase;letter-spacing:.04em"><span style="width:6px;height:6px;border-radius:1px;background:rgba(212,146,42,.2);display:inline-block"></span>Partial</div>
+    <div style="display:flex;gap:6px;align-items:center">
+      <div style="display:flex;align-items:center;gap:3px;font-size:9px;color:var(--gold);text-transform:uppercase;letter-spacing:.04em"><span style="width:6px;height:6px;border-radius:50%;background:var(--gold);display:inline-block"></span>Done</div>
+      <div style="display:flex;align-items:center;gap:3px;font-size:9px;color:var(--amber);text-transform:uppercase;letter-spacing:.04em"><span style="width:6px;height:6px;border-radius:50%;background:var(--amber);display:inline-block"></span>Partial</div>
+      <div style="display:flex;align-items:center;gap:3px;font-size:9px;color:var(--blue);text-transform:uppercase;letter-spacing:.04em"><span style="width:6px;height:6px;border-radius:50%;background:var(--blue);display:inline-block"></span>Journal</div>
+      <div style="display:flex;align-items:center;gap:3px;font-size:9px;color:var(--green);text-transform:uppercase;letter-spacing:.04em"><span style="width:6px;height:6px;border-radius:50%;background:var(--green);display:inline-block"></span>Weight</div>
     </div>
   </div>
-  <div class="card"><div id="cal-grid"></div></div>
+
+  <!-- Monthly stats -->
+  <div class="mstats" id="cal-mstats"></div>
+
+  <!-- Calendar grid -->
+  <div class="card" style="padding:12px"><div id="cal-grid"></div></div>
+
+  <!-- Streak card -->
   <div class="card">
-    <div style="font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:600;margin-bottom:10px">Streak</div>
+    <div style="font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:600;margin-bottom:10px">Streak &amp; Compliance</div>
     <div style="display:flex;justify-content:space-between">
-      <div style="text-align:center"><div style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;color:var(--gold)" id="streak-current">0 🔥</div><div style="font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.06em">Current</div></div>
-      <div style="text-align:center"><div style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;color:var(--text2)" id="streak-best">0</div><div style="font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.06em">Best</div></div>
+      <div style="text-align:center"><div style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;color:var(--gold)" id="streak-current">0 🔥</div><div style="font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.06em">Current Streak</div></div>
+      <div style="text-align:center"><div style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;color:var(--text2)" id="streak-best">0</div><div style="font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.06em">Best Streak</div></div>
       <div style="text-align:center"><div style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;color:var(--green)" id="streak-week">0%</div><div style="font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.06em">This Week</div></div>
     </div>
+  </div>
+
+  <!-- Reminders / Notifications -->
+  <div class="card">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">
+      <div style="font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:600">Protocol Reminders</div>
+      <div id="notif-status-badge" class="notif-status tag ta">Off</div>
+    </div>
+    <div style="font-size:11px;color:var(--text3);margin-bottom:12px">Get notified when it's time for each part of your protocol. Tap Enable to allow notifications.</div>
+    <button class="btn btn-p btn-sm" id="notif-enable-btn" onclick="requestNotifPermission()" style="margin-bottom:14px;width:100%">Enable Reminders</button>
+    <div id="notif-rows"></div>
+    <div style="margin-top:10px">
+      <button class="btn btn-g btn-sm" onclick="saveNotifSettings()" style="width:100%">Save Reminder Times</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ CALENDAR DAY DETAIL MODAL ═══ -->
+<div class="overlay" id="cal-modal-overlay" onclick="if(event.target===this)closeCalModal()">
+  <div class="cal-modal">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:2px">
+      <h3 id="cal-modal-date"></h3>
+      <button onclick="closeCalModal()" style="background:none;border:none;font-size:20px;cursor:pointer;color:var(--text3);padding:0 2px;line-height:1">&times;</button>
+    </div>
+    <div class="cal-modal-sub" id="cal-modal-sub"></div>
+    <div id="cal-modal-body"></div>
   </div>
 </div>
 
@@ -1426,18 +1498,69 @@ function renderCalendar() {
   const daysInMonth = new Date(year, month+1, 0).getDate();
   const today = now.getDate();
   const streaks = loadStreaks();
+  const jData = journalData || [];
+  const wtData = loadWeightData();
+
+  // Build lookup maps for journal and weight entries
+  const jMap = {};
+  jData.forEach(e => { if (e.dateKey) jMap[e.dateKey] = e; });
+  const wtMap = {};
+  (wtData.entries || []).forEach(e => { if (e.dateKey) wtMap[e.dateKey] = e; });
+
   for (let i = 0; i < firstDay; i++) grid.appendChild(document.createElement('div'));
+  let doneDaysMonth = 0, partialDaysMonth = 0, journalDaysMonth = 0;
+
   for (let d = 1; d <= daysInMonth; d++) {
-    const el = document.createElement('div');
-    el.textContent = d;
     const key = year + '-' + String(month+1).padStart(2,'0') + '-' + String(d).padStart(2,'0');
+    const compStatus = streaks.history && streaks.history[key];
+    const hasJournal = !!jMap[key];
+    const hasWeight = !!wtMap[key];
+    if (compStatus === 'done') doneDaysMonth++;
+    if (compStatus === 'partial') partialDaysMonth++;
+    if (hasJournal) journalDaysMonth++;
+
+    const el = document.createElement('div');
+    // Day number
+    const numEl = document.createElement('div');
+    numEl.className = 'cday-num';
+    numEl.textContent = d;
+    el.appendChild(numEl);
+    // Dots row
+    const dotsEl = document.createElement('div');
+    dotsEl.className = 'cday-dots';
+    if (compStatus === 'done') { const dot = document.createElement('div'); dot.className = 'cdot'; dot.style.background = 'var(--gold)'; dotsEl.appendChild(dot); }
+    else if (compStatus === 'partial') { const dot = document.createElement('div'); dot.className = 'cdot'; dot.style.background = 'var(--amber)'; dotsEl.appendChild(dot); }
+    if (hasJournal) { const dot = document.createElement('div'); dot.className = 'cdot'; dot.style.background = 'var(--blue)'; dotsEl.appendChild(dot); }
+    if (hasWeight) { const dot = document.createElement('div'); dot.className = 'cdot'; dot.style.background = 'var(--green)'; dotsEl.appendChild(dot); }
+    el.appendChild(dotsEl);
+
     if (d === today) el.className = 'cday today';
-    else if (streaks.history && streaks.history[key] === 'done') el.className = 'cday done';
-    else if (streaks.history && streaks.history[key] === 'partial') el.className = 'cday partial';
+    else if (compStatus === 'done') el.className = 'cday done';
+    else if (compStatus === 'partial') el.className = 'cday partial';
     else if (d < today) el.className = 'cday past';
     else el.className = 'cday fut';
+
+    // Click to open detail (only for past/today)
+    if (d <= today) {
+      el.style.cursor = 'pointer';
+      el.onclick = (function(dk, ds, jEntry, wtEntry, dayNum) {
+        return function() { openCalDay(dk, ds, jEntry, wtEntry, dayNum, month, year); };
+      })(key, compStatus, jMap[key], wtMap[key], d);
+    }
     grid.appendChild(el);
   }
+
+  // Monthly stats
+  const mstats = document.getElementById('cal-mstats');
+  if (mstats) {
+    const totalPast = Math.min(today, daysInMonth);
+    const compPct = totalPast > 0 ? Math.round((doneDaysMonth + partialDaysMonth * 0.5) / totalPast * 100) : 0;
+    mstats.innerHTML =
+      '<div class="mstat"><div class="mstat-val" style="color:var(--gold)">' + compPct + '%</div><div class="mstat-lbl">Compliance</div></div>' +
+      '<div class="mstat"><div class="mstat-val" style="color:var(--blue)">' + journalDaysMonth + '</div><div class="mstat-lbl">Journal Days</div></div>' +
+      '<div class="mstat"><div class="mstat-val" style="color:var(--green)">' + (wtData.entries ? wtData.entries.length : 0) + '</div><div class="mstat-lbl">Weigh-ins</div></div>';
+  }
+
   const sc = document.getElementById('streak-current');
   const sb = document.getElementById('streak-best');
   const sw = document.getElementById('streak-week');
@@ -1449,6 +1572,163 @@ function renderCalendar() {
     const doneDays = weekDays.filter(k => streaks.history && (streaks.history[k] === 'done' || streaks.history[k] === 'partial')).length;
     sw.textContent = Math.round(doneDays/7*100) + '%';
   }
+
+  renderNotifSettings();
+}
+
+function openCalDay(dateKey, compStatus, jEntry, wtEntry, dayNum, month, year) {
+  const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const overlay = document.getElementById('cal-modal-overlay');
+  const dateEl = document.getElementById('cal-modal-date');
+  const subEl = document.getElementById('cal-modal-sub');
+  const bodyEl = document.getElementById('cal-modal-body');
+  if (!overlay) return;
+  dateEl.textContent = MONTHS[month] + ' ' + dayNum + ', ' + year;
+  const statusLabel = compStatus === 'done' ? 'Full Compliance' : compStatus === 'partial' ? 'Partial Compliance' : 'No Data';
+  const statusColor = compStatus === 'done' ? 'var(--gold)' : compStatus === 'partial' ? 'var(--amber)' : 'var(--text3)';
+  subEl.innerHTML = '<span style="color:' + statusColor + ';font-weight:600">' + statusLabel + '</span>';
+  let html = '';
+
+  // Wellness journal section
+  if (jEntry) {
+    html += '<div class="cal-section">';
+    html += '<div class="cal-section-title">Wellness Check-in</div>';
+    html += '<div class="cal-score-row">';
+    html += '<span class="cal-score-chip" style="background:rgba(46,143,98,.1);color:var(--green)">Energy ' + jEntry.e + '/5</span>';
+    html += '<span class="cal-score-chip" style="background:rgba(184,146,42,.1);color:var(--gold)">Libido ' + jEntry.l + '/5</span>';
+    html += '<span class="cal-score-chip" style="background:rgba(58,110,184,.1);color:var(--blue)">Sleep ' + jEntry.s + '/5</span>';
+    html += '<span class="cal-score-chip" style="background:rgba(192,120,32,.1);color:var(--amber)">Mood ' + jEntry.m + '/5</span>';
+    html += '</div>';
+    if (jEntry.notes && jEntry.notes !== 'No notes') {
+      html += '<div style="font-size:11px;color:var(--text3);margin-top:8px;font-style:italic">&ldquo;' + esc(jEntry.notes) + '&rdquo;</div>';
+    }
+    html += '</div>';
+  } else {
+    html += '<div class="cal-section"><div class="cal-section-title">Wellness Check-in</div><div style="font-size:11px;color:var(--text3);padding:6px 0">No journal entry for this day.</div></div>';
+  }
+
+  // Weight section
+  if (wtEntry) {
+    const g = loadWeightData().goals;
+    html += '<div class="cal-section">';
+    html += '<div class="cal-section-title">Body Composition</div>';
+    html += '<div style="display:flex;gap:12px;align-items:center;padding:6px 0">';
+    html += '<div style="text-align:center"><div style="font-family:Cormorant Garamond,serif;font-size:22px;font-weight:600;color:var(--green)">' + esc(String(wtEntry.weight)) + '</div><div style="font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.06em">' + esc(g ? g.unit : 'lbs') + '</div></div>';
+    if (wtEntry.bf) html += '<div style="text-align:center"><div style="font-family:Cormorant Garamond,serif;font-size:22px;font-weight:600;color:var(--blue)">' + esc(String(wtEntry.bf)) + '%</div><div style="font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.06em">Body Fat</div></div>';
+    html += '</div>';
+    if (wtEntry.notes) html += '<div style="font-size:11px;color:var(--text3);font-style:italic">&ldquo;' + esc(wtEntry.notes) + '&rdquo;</div>';
+    html += '</div>';
+  }
+
+  // No data fallback
+  if (!jEntry && !wtEntry && !compStatus) {
+    html += '<div style="text-align:center;padding:20px;color:var(--text3);font-size:13px">No data logged for this day.</div>';
+  }
+
+  bodyEl.innerHTML = html;
+  overlay.classList.add('on');
+}
+
+function closeCalDay() { closeCalModal(); }
+function closeCalModal() {
+  const overlay = document.getElementById('cal-modal-overlay');
+  if (overlay) overlay.classList.remove('on');
+}
+
+// ═══════════════════════════════════════════════════════════════
+// NOTIFICATIONS / REMINDERS
+// ═══════════════════════════════════════════════════════════════
+const REMINDER_DEFAULTS = [
+  { id: 'morning', label: '🌅 Morning Protocol', sub: 'Semax, BPC-157, GLOW, Enclomiphene, NAD+', defaultTime: '07:30', enabled: true },
+  { id: 'evening', label: '🌆 Evening Protocol', sub: 'Kisspeptin-10, TB-500', defaultTime: '18:00', enabled: true },
+  { id: 'bedtime', label: '🌙 Bedtime Stack', sub: 'CJC-1295 + Ipamorelin, DSIP', defaultTime: '22:00', enabled: true },
+  { id: 'meals',   label: '🍽 With Meals', sub: 'Berberine, Omega-3, CoQ10, Lion’s Mane, Ashwagandha', defaultTime: '12:00', enabled: false },
+  { id: 'weighin', label: '⚖️ Daily Weigh-in', sub: 'Step on the scale and log your weight', defaultTime: '08:00', enabled: false },
+];
+
+function loadNotifSettings() {
+  try { return JSON.parse(localStorage.getItem('pbv_notif') || 'null') || REMINDER_DEFAULTS.map(r => ({...r})); } catch(e) { return REMINDER_DEFAULTS.map(r => ({...r})); }
+}
+function saveNotifSettings() {
+  const rows = loadNotifSettings();
+  rows.forEach(r => {
+    const tog = document.getElementById('notif-tog-' + r.id);
+    const time = document.getElementById('notif-time-' + r.id);
+    if (tog) r.enabled = tog.checked;
+    if (time) r.time = time.value;
+  });
+  localStorage.setItem('pbv_notif', JSON.stringify(rows));
+  scheduleNotifications(rows);
+  const badge = document.getElementById('notif-status-badge');
+  if (badge) { badge.textContent = 'Saved'; badge.className = 'notif-status tag tg'; setTimeout(() => { badge.textContent = Notification.permission === 'granted' ? 'On' : 'Off'; badge.className = 'notif-status tag ' + (Notification.permission === 'granted' ? 'tg' : 'ta'); }, 2000); }
+}
+
+function renderNotifSettings() {
+  const container = document.getElementById('notif-rows');
+  if (!container) return;
+  const settings = loadNotifSettings();
+  const badge = document.getElementById('notif-status-badge');
+  const enableBtn = document.getElementById('notif-enable-btn');
+  const granted = Notification.permission === 'granted';
+  if (badge) { badge.textContent = granted ? 'On' : 'Off'; badge.className = 'notif-status tag ' + (granted ? 'tg' : 'ta'); }
+  if (enableBtn) { enableBtn.style.display = granted ? 'none' : 'block'; }
+  container.innerHTML = '';
+  settings.forEach(r => {
+    const row = document.createElement('div');
+    row.className = 'notif-row';
+    row.innerHTML =
+      '<div class="notif-info"><div class="notif-label">' + esc(r.label) + '</div><div class="notif-sub">' + esc(r.sub) + '</div></div>' +
+      '<input type="time" class="notif-time" id="notif-time-' + r.id + '" value="' + esc(r.time || r.defaultTime) + '" ' + (granted ? '' : 'disabled') + '>' +
+      '<label class="toggle"><input type="checkbox" id="notif-tog-' + r.id + '" ' + (r.enabled ? 'checked' : '') + ' ' + (granted ? '' : 'disabled') + '><span class="toggle-slider"></span></label>';
+    container.appendChild(row);
+  });
+}
+
+async function requestNotifPermission() {
+  if (!('Notification' in window)) { alert('Your browser does not support notifications.'); return; }
+  const result = await Notification.requestPermission();
+  if (result === 'granted') {
+    renderNotifSettings();
+    const settings = loadNotifSettings();
+    scheduleNotifications(settings);
+    new Notification('YB Protocol Reminders Enabled 💪', { body: 'You’ll be reminded when it’s time for each part of your protocol.', icon: '/pbv-companion/icon-192.png' });
+  } else {
+    alert('Notifications were blocked. Please enable them in your browser settings.');
+  }
+}
+
+function scheduleNotifications(settings) {
+  // Clear any existing timers
+  if (window._notifTimers) window._notifTimers.forEach(t => clearTimeout(t));
+  window._notifTimers = [];
+  if (Notification.permission !== 'granted') return;
+  const now = new Date();
+  settings.forEach(r => {
+    if (!r.enabled) return;
+    const timeStr = r.time || r.defaultTime;
+    const [h, m] = timeStr.split(':').map(Number);
+    const target = new Date(now);
+    target.setHours(h, m, 0, 0);
+    if (target <= now) target.setDate(target.getDate() + 1); // schedule for tomorrow if already passed
+    const delay = target - now;
+    const timer = setTimeout(() => {
+      new Notification('YB Protocol — ' + r.label, {
+        body: r.sub,
+        icon: '/pbv-companion/icon-192.png',
+        badge: '/pbv-companion/icon-192.png',
+        tag: 'pbv-' + r.id
+      });
+      // Re-schedule for next day
+      const nextTimer = setTimeout(() => scheduleNotifications(loadNotifSettings()), 1000);
+      window._notifTimers.push(nextTimer);
+    }, delay);
+    window._notifTimers.push(timer);
+  });
+}
+
+// Auto-start notifications on load if already granted
+if (Notification.permission === 'granted') {
+  scheduleNotifications(loadNotifSettings());
 }
 
 // ═══════════════════════════════════════════════════════════════
