@@ -132,11 +132,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 .quote-bar{border-left:2px solid var(--gold);padding:10px 14px;margin-bottom:14px;background:rgba(201,168,76,0.12);border-radius:0 8px 8px 0;border:1px solid rgba(201,168,76,0.18)}
 .quote-text{font-family:'Cormorant Garamond',serif;font-size:14px;font-style:italic;color:var(--text2);line-height:1.5}
 .reset-notice{font-size:10px;color:var(--text3);text-align:center;padding:10px 0 0;border-top:1px solid var(--border);margin-top:8px}
-.ai-key-banner{background:rgba(201,168,76,0.06);border:1px solid var(--goldborder);border-radius:10px;padding:14px;margin-bottom:12px}
-.ai-key-banner .ak-title{font-size:11px;color:var(--gold);font-weight:500;margin-bottom:4px}
-.ai-key-banner .ak-desc{font-size:11px;color:var(--text2);line-height:1.5;margin-bottom:8px}
-.ai-key-banner input{background:var(--bg3);border:1px solid var(--border2);border-radius:5px;padding:8px 11px;font-size:12px;color:var(--text);font-family:'DM Sans',sans-serif;outline:none;width:100%;margin-bottom:8px}
-.ai-key-banner input:focus{border-color:var(--gold)}
+.ai-status-card{background:rgba(76,175,130,0.06);border:1px solid rgba(76,175,130,0.2);border-radius:10px;padding:12px 14px;margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.ai-status-dot{width:8px;height:8px;border-radius:50%;background:var(--green);flex-shrink:0;box-shadow:0 0 6px rgba(76,175,130,0.6)}
+.ai-status-text{font-size:11px;color:var(--text2);line-height:1.5}
 </style>
 </head>
 <body>
@@ -330,11 +328,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
   <div class="quote-bar" style="margin-bottom:12px">
     <div class="quote-text">I know your stack, your bloodwork, and your mission. Ask me anything.</div>
   </div>
-  <div class="ai-key-banner" id="ai-key-section" style="display:none">
-    <div class="ak-title">Connect AI Coach</div>
-    <div class="ak-desc">Enter your OpenAI API key to enable the AI coach. Your key is stored locally on this device only and never sent anywhere except OpenAI.</div>
-    <input type="password" id="ai-key-input" placeholder="sk-...">
-    <button class="btn btn-p btn-sm" onclick="saveApiKey()" style="width:100%">Connect AI Coach</button>
+  <div class="ai-status-card">
+    <div class="ai-status-dot"></div>
+    <div class="ai-status-text">AI Coach is live and ready — fully loaded with Yahya's bloodwork and protocol.</div>
   </div>
   <div class="chips" id="ai-chips"></div>
   <div class="card" style="margin-bottom:0">
@@ -344,9 +340,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
       <button class="sbtn" onclick="sendMsg()"><svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
     </div>
   </div>
-  <div style="margin-top:10px;text-align:center">
-    <button class="btn btn-g btn-sm" onclick="clearApiKey()" id="ai-clear-btn" style="display:none;font-size:10px">Disconnect AI</button>
-  </div>
+
 </div>
 
 </div><!-- /.main -->
@@ -509,6 +503,7 @@ function esc(str) {
 // ═══════════════════════════════════════════════════════════════
 // LOCALSTORAGE — PROTOCOL
 // ═══════════════════════════════════════════════════════════════
+
 function loadProtocol() {
   const today = todayKey();
   const savedDate = localStorage.getItem('pbv_date');
@@ -1052,8 +1047,13 @@ function renderBW() {
 }
 
 // ═══════════════════════════════════════════════════════════════
-// AI COACH
+// AI COACH — calls secure proxy server (no API key needed by user)
 // ═══════════════════════════════════════════════════════════════
+
+// Set this to your deployed Render.com URL after deployment
+// e.g. 'https://pbv-companion-ai.onrender.com'
+const AI_PROXY_URL = 'https://pbv-companion-ai.onrender.com';
+
 const CHIPS = [
   "What's my morning protocol?",
   "Explain my bedtime stack",
@@ -1065,81 +1065,10 @@ const CHIPS = [
   "Best time for CJC-1295?"
 ];
 
-function getApiKey() {
-  return localStorage.getItem('pbv_api_key') || '';
-}
 
-function saveApiKey() {
-  const val = document.getElementById('ai-key-input')?.value?.trim();
-  if (!val || !val.startsWith('sk-')) {
-    alert('Please enter a valid OpenAI API key (starts with sk-).');
-    return;
-  }
-  localStorage.setItem('pbv_api_key', val);
-  renderAI();
-}
 
-function clearApiKey() {
-  if (!confirm('Disconnect AI coach and remove your stored API key?')) return;
-  localStorage.removeItem('pbv_api_key');
-  renderAI();
-}
-
-function getSystemPrompt() {
-  const week = getWeekNumber();
-  const il = protocol.inj.map(i => {
-    const t = TIMING_GROUPS[i.time] || {label:i.time};
-    return '  - ' + i.name + ' ' + i.dose + ' [' + t.label + '] — ' + i.note;
-  }).join('\n');
-  const sl = protocol.supp.map(i => {
-    const t = TIMING_GROUPS[i.time] || {label:i.time};
-    return '  - ' + i.name + ' ' + i.dose + ' [' + t.label + '] — ' + i.note;
-  }).join('\n');
-
-  return `You are the personal AI health coach for Yahya Bakkar — direct, knowledgeable, and always reference his actual numbers. Keep replies under 200 words. Use line breaks for readability.
-
-BLOODWORK (April 2, 2026 baseline):
-- LDL: 164.1 mg/dL → target <100 (FLAGGED — top priority)
-- ApoB: 107 mg/dL → target <90 (FLAGGED)
-- Ferritin: 445 ng/mL → target 30-300 (ELEVATED)
-- Vitamin D: 45.8 ng/mL → target 60-80 (LOW)
-- Total Testosterone: 489 ng/dL → target 700-1000 (BELOW TARGET)
-- Free Testosterone: 104.62 pg/mL → target >150
-- SHBG: 32.4 nmol/L → target 20-30 (slightly high)
-- HDL: 55.5 mg/dL, Triglycerides: 82 mg/dL, hs-CRP: <0.5 mg/L (excellent)
-
-INJECTION PROTOCOL:
-${il}
-
-SUPPLEMENT PROTOCOL:
-${sl}
-
-PHASE: Week ${week} of 8 (Phase 1 — Foundation). Phase 2 adds HCG 500IU 3x/week at Week 9.
-GOALS: Testosterone 800+, LDL <100, Ferritin <300, Vitamin D 60-80.
-
-KEY TIMING NOTES:
-- CJC-1295 + Ipamorelin: BEDTIME only — maximizes GH pulse during deep sleep
-- DSIP: BEDTIME — delta sleep induction peptide
-- Semax, BPC-157, NAD+: MORNING fasted — cognitive/repair/energy
-- Kisspeptin-10, TB-500: EVENING — HPT axis & recovery`;
-}
 
 function renderAI() {
-  const key = getApiKey();
-  const keySection = document.getElementById('ai-key-section');
-  const clearBtn = document.getElementById('ai-clear-btn');
-  const statusTag = document.getElementById('ai-status-tag');
-
-  if (key) {
-    if (keySection) keySection.style.display = 'none';
-    if (clearBtn) clearBtn.style.display = 'inline-flex';
-    if (statusTag) { statusTag.textContent = 'Live'; statusTag.className = 'tag tg'; }
-  } else {
-    if (keySection) keySection.style.display = 'block';
-    if (clearBtn) clearBtn.style.display = 'none';
-    if (statusTag) { statusTag.textContent = 'Disconnected'; statusTag.className = 'tag tr'; }
-  }
-
   const chips = document.getElementById('ai-chips');
   if (chips && chips.innerHTML === '') {
     CHIPS.forEach(c => {
@@ -1177,14 +1106,6 @@ async function sendMsg() {
   const msg = input?.value?.trim();
   if (!msg || aiLoading) return;
 
-  const key = getApiKey();
-  if (!key) {
-    const ks = document.getElementById('ai-key-section');
-    if (ks) ks.style.display = 'block';
-    alert('Please connect your OpenAI API key first.');
-    return;
-  }
-
   input.value = '';
   chatHistory.push({role:'user', content:msg});
   aiLoading = true;
@@ -1196,31 +1117,23 @@ async function sendMsg() {
       content: m.content
     }));
 
-    const resp = await fetch('https://api.openai.com/v1/chat/completions', {
+    const resp = await fetch(AI_PROXY_URL + '/api/chat', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + key
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        model: 'gpt-4o-mini',
-        max_tokens: 400,
-        temperature: 0.7,
-        messages: [
-          {role:'system', content:getSystemPrompt()},
-          ...messages
-        ]
+        messages,
+        weekNumber: getWeekNumber()
       })
     });
 
     const data = await resp.json();
     if (data.error) {
-      chatHistory.push({role:'assistant', content:'API Error: ' + (data.error.message || 'Unknown error. Check your API key.')});
+      chatHistory.push({role:'assistant', content:'Error: ' + data.error});
     } else {
-      chatHistory.push({role:'assistant', content: data.choices?.[0]?.message?.content || 'No response received.'});
+      chatHistory.push({role:'assistant', content: data.reply || 'No response received.'});
     }
   } catch (e) {
-    chatHistory.push({role:'assistant', content:'Network error. Check your connection and try again.'});
+    chatHistory.push({role:'assistant', content:'Could not reach AI service. Check your connection and try again.'});
   }
 
   aiLoading = false;
