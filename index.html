@@ -266,7 +266,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
       <div>
         <div style="font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:600">Phase 1 — Foundation</div>
-        <div style="font-size:10px;color:var(--text3);margin-top:2px;text-transform:uppercase;letter-spacing:0.05em" id="dash-week-label">Week 1 of 8 · HCG unlocks Week 9</div>
+        <div style="font-size:10px;color:var(--text3);margin-top:2px;text-transform:uppercase;letter-spacing:0.05em" id="dash-week-label">Week 1 of 12 · HCG unlocks Week 6</div>
       </div>
       <div class="tag tgo">Active</div>
     </div>
@@ -646,8 +646,8 @@ const QUOTES = [
 
 const TIMING_GROUPS = {
   morning: {label:'Morning — Fasted (Upon Waking)', icon:'🌅'},
-  evening: {label:'Evening — 1-2h After Last Meal',  icon:'🌆'},
-  bed:     {label:'Bedtime — 30-60 Min Before Sleep', icon:'🌙'},
+  evening: {label:'Evening — Supports Sleep & Recovery', icon:'🌆'},
+  bed:     {label:'Bedtime — Empty Stomach (2+ hrs after meal)', icon:'🌙'},
   asNeeded:{label:'As Needed',                        icon:'⚡'},
   meals:   {label:'With Meals',                       icon:'🍽'},
   empty:   {label:'Empty Stomach',                    icon:'⏰'}
@@ -657,16 +657,16 @@ const TIMING_ORDER = ['morning','evening','bed','meals','empty','asNeeded'];
 
 const DEFAULT_PROTOCOL = {
   inj: [
-    {id:'semax',  name:'Semax 1%',              dose:'200mcg',        time:'morning', note:'Intranasal — cognitive boost, fasted',         checked:false},
-    {id:'bpc',    name:'BPC-157',               dose:'250mcg',        time:'morning', note:'Sub-Q — gut healing & repair, fasted',         checked:false},
-    {id:'glow',   name:'GLOW Blend',            dose:'1 vial',        time:'morning', note:'Sub-Q — skin & collagen support',              checked:false},
-    {id:'enclo',  name:'Enclomiphene',          dose:'12.5mg',        time:'morning', note:'Oral — testosterone stimulation',              checked:false},
-    {id:'nad',    name:'NAD+',                  dose:'250mg',         time:'morning', note:'Sub-Q — cellular energy & metabolism',         checked:false},
-    {id:'kiss',   name:'Kisspeptin-10',         dose:'100mcg',        time:'evening', note:'Sub-Q — HPT axis stimulation',                 checked:false},
-    {id:'tb4',    name:'TB-500',                dose:'2.5mg',         time:'evening', note:'Sub-Q — tissue recovery & repair',             checked:false},
-    {id:'cjc',    name:'CJC-1295 + Ipamorelin',dose:'300mcg/300mcg', time:'bed',     note:'Sub-Q — GH release, fasted 2h before bed',     checked:false},
-    {id:'dsip',   name:'DSIP',                  dose:'200mcg',        time:'bed',     note:'Sub-Q — delta sleep induction',                checked:false},
-    {id:'pt141',  name:'PT-141',                dose:'1mg',           time:'asNeeded',note:'Sub-Q — as needed',                           checked:false}
+    {id:'nad',    name:'NAD+ 500mg',            dose:'Full vial',     time:'morning', note:'Sub-Q or IV — before breakfast, fasted',       checked:false},
+    {id:'amino',  name:'5 Amino 1MQ',           dose:'10mg',          time:'morning', note:'Sub-Q or capsule — synergistic with NAD+',     checked:false},
+    {id:'semax',  name:'Semax 10mg',            dose:'9-15 units',    time:'morning', note:'Sub-Q or intranasal — cognitive peak, fasted', checked:false},
+    {id:'kiss',   name:'Kisspeptin-10',         dose:'Per protocol',  time:'morning', note:'Sub-Q — aligns with natural LH pulsatility',  checked:false},
+    {id:'enclo',  name:'Enclomiphene',          dose:'12.5mg',        time:'morning', note:'Oral with food — pituitary amplifier',         checked:false},
+    {id:'glow',   name:'GLOW Mix 70mg',         dose:'1 vial',        time:'morning', note:'Sub-Q — GHK-Cu + BPC-157 + TB-500 blend',     checked:false},
+    {id:'igf',    name:'IGF-1 LR3',             dose:'15 units',      time:'morning', note:'Sub-Q — post-workout or AM on training days (5 days/week)', checked:false},
+    {id:'epi',    name:'Epitalon 10mg',         dose:'15 units',      time:'evening', note:'Sub-Q — telomere protection, supports melatonin', checked:false},
+    {id:'cjc',    name:'CJC-1295 + Ipamorelin',dose:'10 units each', time:'bed',     note:'Sub-Q — empty stomach, 2+ hrs after last meal (5 on / 2 off)', checked:false},
+    {id:'hcg',    name:'HCG 5000iu',            dose:'250-500 IU',    time:'bed',     note:'Sub-Q — Phase 2 only (Week 6+), Mon/Wed/Fri · monitor E2 at Week 8', checked:false, phase2:true}
   ],
   supp: [
     {id:'bern',  name:'Berberine',             dose:'500mg 2-3x/day', time:'meals',   note:'With meals — LDL reduction',                  checked:false},
@@ -852,7 +852,7 @@ function renderDashboard() {
   if (sub) sub.textContent = 'Week ' + week + ' · Phase 1 · ' + formatDate(now);
 
   const wl = document.getElementById('dash-week-label');
-  if (wl) wl.textContent = 'Week ' + week + ' of 8 · HCG unlocks Week 9';
+  if (wl) wl.textContent = 'Week ' + week + ' of 12 · HCG unlocks Week 6';
 
   const ws = document.getElementById('dash-week-start');
   if (ws) ws.textContent = 'Week ' + week;
@@ -1125,7 +1125,7 @@ function renderWeight() {
       "Am I on track for my goal?",
       "How is my protocol helping weight loss?",
       "What should I eat to hit my target?",
-      "How does BPC-157 affect body composition?",
+      "How does GLOW Mix affect body composition?",
       "Best cardio for fat loss on my protocol?"
     ] : [
       "What's a realistic weight loss goal?",
@@ -1264,7 +1264,7 @@ function saveWeightGoals() {
     "• Target: " + tw + unit + " (from " + cw + unit + " — " + (cw - tw).toFixed(1) + unit + " to lose)\n" +
     (tbf ? "• Body fat target: " + tbf + "% (from " + (cbf || '?') + "%)\n" : '') +
     "• Timeline: " + timeline + " weeks\n\n" +
-    "Your peptide stack (BPC-157, CJC-1295/Ipamorelin, TB-500) actively supports body recomposition. I'll track your progress and give you weekly feedback. Log your weigh-ins regularly for the best insights.";
+    "Your peptide stack (CJC-1295/Ipamorelin, IGF-1 LR3, GLOW Mix) actively supports body recomposition. CJC-1295 + Ipamorelin drives GH release and fat metabolism, IGF-1 LR3 partitions nutrients into muscle rather than fat, and GLOW Mix (BPC-157 + TB-500 + GHK-Cu) accelerates tissue repair. I'll track your progress and give you weekly feedback. Log your weigh-ins regularly for the best insights.";
   wtChatHistory = [{role:'assistant', content: greeting}];
   renderWtChat();
 }
@@ -1639,9 +1639,9 @@ function closeCalModal() {
 // NOTIFICATIONS / REMINDERS
 // ═══════════════════════════════════════════════════════════════
 const REMINDER_DEFAULTS = [
-  { id: 'morning', label: '🌅 Morning Protocol', sub: 'Semax, BPC-157, GLOW, Enclomiphene, NAD+', defaultTime: '07:30', enabled: true },
-  { id: 'evening', label: '🌆 Evening Protocol', sub: 'Kisspeptin-10, TB-500', defaultTime: '18:00', enabled: true },
-  { id: 'bedtime', label: '🌙 Bedtime Stack', sub: 'CJC-1295 + Ipamorelin, DSIP', defaultTime: '22:00', enabled: true },
+  { id: 'morning', label: '🌅 Morning Protocol', sub: 'NAD+, 5 Amino 1MQ, Semax, Kisspeptin, Enclomiphene, GLOW Mix, IGF-1 LR3', defaultTime: '07:30', enabled: true },
+  { id: 'evening', label: '🌆 Evening Protocol', sub: 'Epitalon 10mg — telomere protection & melatonin support', defaultTime: '18:00', enabled: true },
+  { id: 'bedtime', label: '🌙 Bedtime Stack', sub: 'CJC-1295 + Ipamorelin (empty stomach, 2+ hrs after last meal)', defaultTime: '22:00', enabled: true },
   { id: 'meals',   label: '🍽 With Meals', sub: 'Berberine, Omega-3, CoQ10, Lion’s Mane, Ashwagandha', defaultTime: '12:00', enabled: false },
   { id: 'weighin', label: '⚖️ Daily Weigh-in', sub: 'Step on the scale and log your weight', defaultTime: '08:00', enabled: false },
 ];

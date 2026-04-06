@@ -57,39 +57,40 @@ BLOODWORK (April 2, 2026 baseline):
 - SHBG: 32.4 nmol/L → target 20-30 (slightly high)
 - HDL: 55.5 mg/dL, Triglycerides: 82 mg/dL, hs-CRP: <0.5 mg/L (excellent)
 
-INJECTION PROTOCOL:
-  MORNING (Fasted, upon waking):
-  - Semax 1% 200mcg — Intranasal, cognitive boost
-  - BPC-157 250mcg — Sub-Q, gut healing & repair
-  - GLOW Blend 1 vial — Sub-Q, skin & collagen support
-  - Enclomiphene 12.5mg — Oral, testosterone stimulation
-  - NAD+ 250mg — Sub-Q, cellular energy & metabolism
+PEPTIDE PROTOCOL (10 compounds — optimized per Peptides By Veterans protocol):
+  MORNING (Fasted, upon waking — before breakfast):
+  - NAD+ 500mg — Sub-Q or IV, cellular energy & mitochondrial repair
+  - 5 Amino 1MQ 10mg — Sub-Q or capsule, synergistic with NAD+ for metabolism
+  - Semax 10mg — Sub-Q or intranasal (9-15 units), cognitive amplifier & BDNF boost
+  - Kisspeptin-10 — Sub-Q, HPT axis master switch — triggers GnRH → LH/FSH → testosterone
+  - Enclomiphene 12.5mg — Oral with food, pituitary amplifier — blocks estrogen brake on LH/FSH
+  - GLOW Mix 70mg (GHK-Cu + BPC-157 + TB-500) — Sub-Q, complete repair & glow stack
+  - IGF-1 LR3 1mg — Sub-Q, 15 units — post-workout or AM on training days (5 days/week)
 
-  EVENING (1-2h after last meal):
-  - Kisspeptin-10 100mcg — Sub-Q, HPT axis stimulation
-  - TB-500 2.5mg — Sub-Q, tissue recovery & repair
+  EVENING (supports melatonin & circadian alignment):
+  - Epitalon 10mg — Sub-Q, 15 units — telomere protection & longevity compound
 
-  BEDTIME (30-60 min before sleep — maximizes GH pulse during deep sleep):
-  - CJC-1295 + Ipamorelin 300mcg/300mcg — Sub-Q, GH release, fasted 2h before bed
-  - DSIP 200mcg — Sub-Q, delta sleep induction
-
-  AS NEEDED:
-  - PT-141 1mg — Sub-Q
+  BEDTIME (empty stomach, 2+ hours after last meal — maximizes nocturnal GH pulse):
+  - CJC-1295 No DAC + Ipamorelin — Sub-Q, 10 units each — gold standard GH-releasing stack (5 on / 2 off)
+  - HCG 5000iu — Sub-Q, 250-500 IU — PHASE 2 ONLY (starts Week 6), Mon/Wed/Fri — direct testicular stimulation
 
 SUPPLEMENT PROTOCOL:
-  WITH MEALS: Berberine 500mg 2-3x, Red Yeast Rice 600mg 2x, Omega-3 3-4g EPA/DHA, CoQ10 200mg, Lion's Mane 1000mg 2x, Ashwagandha 300mg 2x, Digestive Enzymes 1 cap
-  MORNING: Vitamin D3+K2 5000IU/200mcg, Zinc+Copper 30mg/2mg, Boron 10mg, Probiotic 50B CFU
+  WITH MEALS: Berberine 500mg 2-3x (LDL/ApoB), Red Yeast Rice 600mg 2x (LDL synergy), Omega-3 3-4g EPA/DHA, CoQ10 Ubiquinol 200mg, Lion's Mane 1000mg 2x, Ashwagandha KSM-66 300mg 2x, Digestive Enzymes 1 cap
+  MORNING: Vitamin D3+K2 5000IU/200mcg (Vitamin D 45.8 → target 60-80), Zinc+Copper 30mg/2mg, Boron 10mg, Probiotic 50B CFU
   BEDTIME: Magnesium Glycinate 400mg
-  EMPTY STOMACH: IP6 1500mg (ferritin reduction)
+  EMPTY STOMACH: IP6 1500mg (Ferritin 445 → target 30-300)
 
-PHASE: Week ${weekNumber} of 8 (Phase 1 — Foundation). Phase 2 adds HCG 500IU 3x/week at Week 9.
-GOALS: Testosterone 800+, LDL <100, Ferritin <300, Vitamin D 60-80.
+PHASE: Week ${weekNumber} of 12 (Phase 1 — Foundation, Weeks 1-5). Phase 2 (Weeks 6-12) adds HCG 250-500 IU Mon/Wed/Fri.
+GOALS: Testosterone 800-1000 ng/dL, LDL <100, ApoB <90, Ferritin 30-300, Vitamin D 60-80.
+TRIPLE-AXIS TESTOSTERONE STRATEGY: Kisspeptin (hypothalamus) + Enclomiphene (pituitary) + HCG Phase 2 (testes) = comprehensive HPT axis optimization.
 
 KEY TIMING NOTES:
-- CJC-1295 + Ipamorelin: BEDTIME only — maximizes GH pulse during deep sleep
-- DSIP: BEDTIME — delta sleep induction peptide
-- Semax, BPC-157, NAD+: MORNING fasted — cognitive/repair/energy
-- Kisspeptin-10, TB-500: EVENING — HPT axis & recovery`;
+- CJC-1295 + Ipamorelin: BEDTIME ONLY on empty stomach — maximizes nocturnal GH pulse (5 on / 2 off)
+- Kisspeptin: MORNING — aligns with natural LH pulsatility (NOT evening)
+- Epitalon: EVENING — supports melatonin and circadian rhythm
+- IGF-1 LR3: Post-workout or morning on training days ONLY (5 days/week) — 4-6 week cycles with 4 weeks off
+- HCG: Phase 2 only (Week 6+) — do NOT start before Week 6; Kisspeptin + Enclomiphene must prime HPT axis first
+- GLOW Mix REPLACES standalone BPC-157 and TB-500 — contains both plus GHK-Cu`;
 }
 
 // ─── CHAT ENDPOINT ───────────────────────────────────────────────────────────
